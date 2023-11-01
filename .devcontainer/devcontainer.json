@@ -1,0 +1,20 @@
+{
+	"name": "F20CN Container",
+	"image": "mcr.microsoft.com/devcontainers/python:3",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"eamodio.gitlens",
+				"ms-python.python",
+				"vscode-icons-team.vscode-icons",
+				"tomoki1207.pdf",
+				"njpwerner.autodocstring",
+				"aaron-bond.better-comments",
+				"GitHub.copilot",
+				"GitHub.copilot-chat",
+				"bierner.github-markdown-preview",
+				"VisualStudioExptTeam.vscodeintellicode"
+			]
+		}
+	}
+}
