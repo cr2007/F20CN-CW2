@@ -13,7 +13,8 @@
 				"GitHub.copilot",
 				"GitHub.copilot-chat",
 				"bierner.github-markdown-preview",
-				"VisualStudioExptTeam.vscodeintellicode"
+				"VisualStudioExptTeam.vscodeintellicode",
+				"ms-vsliveshare.vsliveshare"
 			]
 		}
 	}
