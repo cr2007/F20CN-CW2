@@ -1,0 +1,15 @@
+{
+	"recommendations": [
+		"eamodio.gitlens",
+		"ms-python.python",
+		"vscode-icons-team.vscode-icons",
+		"tomoki1207.pdf",
+		"njpwerner.autodocstring",
+		"aaron-bond.better-comments",
+		"GitHub.copilot",
+		"GitHub.copilot-chat",
+		"bierner.github-markdown-preview",
+		"VisualStudioExptTeam.vscodeintellicode",
+		"ms-vsliveshare.vsliveshare"
+	]
+}
