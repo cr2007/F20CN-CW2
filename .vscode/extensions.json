@@ -10,6 +10,7 @@
 		"GitHub.copilot-chat",
 		"bierner.github-markdown-preview",
 		"VisualStudioExptTeam.vscodeintellicode",
-		"ms-vsliveshare.vsliveshare"
+		"ms-vsliveshare.vsliveshare",
+		"EditorConfig.EditorConfig"
 	]
 }
