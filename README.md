@@ -1,5 +1,7 @@
 # F20CN CW2
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/cr2007/F20CN-CW2)
+
 ## Computer Network Security
 
 ### Asymmetric Cryptography, Firewall Rules Maintenance
