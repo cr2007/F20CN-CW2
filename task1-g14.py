@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """F20CN CW2 Task 1
    Nov 2023
    Group Members:
