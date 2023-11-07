@@ -10,15 +10,22 @@ import random
 ######## Creating a Public Key ########
 
 def create_random_sequence(sequence_length: int = 8) -> list:
-    """Creates a random sequence of n bits, each being subseqently
     """
+    Creates a random sequence of integers where each subsequent integer is the sum of all previous
+    integers in the sequence plus a new random integer.
 
-    # Create a random sequence of n bits
+    Parameters:
+    sequence_length (int): The length of the sequence to be generated. Default is 8.
+
+    Returns:
+    list: The generated sequence of integers.
+    """
+    # Initialize the sequence with a random integer between 1 and 100
     random_sequence: list = [ random.randint(1,100) ]
 
-    # Add random bits to the sequence until it reaches the desired length
+    # Generate the rest of the sequence
     while len(random_sequence) < sequence_length:
-        # The next element is the sum of the previous element and a random number between 1 and 100
+        # The next element is the sum of all previous elements plus a new random integer
         next_element:int = sum(random_sequence) + random.randint(1,100)
 
         # Add the next element to the sequence
