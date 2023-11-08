@@ -70,15 +70,15 @@ if __name__ == "__main__":
     e: list = create_random_sequence()
 
     # Choose a random prime number
-    q: int = 2 * e[-1] + random.randint(1,random.randint(100,1000) )
+    q: int = 2 * e[-1] + random.randint(1,1000)
     while not is_prime(q): # check if q is prime
         # if not, choose another random prime number
-        q = 2 * e[-1] + random.randint(1,random.randint(100,1000) )
+        q = 2 * e[-1] + random.randint(1,1000)
 
     print(f"Random sequence 'e': {e}")
     print(f"q: {q}")
 
-    w: int = random.randint(1,q-1) # choose a random integer w between 1 and q-1
+    w: int = random.randint(1,q+250) # choose a random integer w between 1 and q-1
     print(f"w: {w}")
     while math.gcd(w,q) != 1:
         # if w and q are not coprime, choose another random integer w
