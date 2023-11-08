@@ -1,6 +1,9 @@
 {
 	"name": "F20CN Container",
-	"image": "mcr.microsoft.com/devcontainers/python:3",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	// "image": "mcr.microsoft.com/devcontainers/python:3",
 	"customizations": {
 		"vscode": {
 			"extensions": [
