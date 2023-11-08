@@ -33,3 +33,7 @@ def create_random_sequence(sequence_length: int = 8) -> list:
 
     # Return the random sequence
     return random_sequence
+
+if __name__ == "__main__":
+    # Create a random sequence of integers
+    e: list = create_random_sequence()
