@@ -84,3 +84,7 @@ if __name__ == "__main__":
         # if w and q are not coprime, choose another random integer w
         w = random.randint(1,q-1)
         print(f"w: {w}")
+
+    # Calculate the public key
+    h: list = [ (w * i) % q for i in e ]
+    print(f"Public key: {h}")
