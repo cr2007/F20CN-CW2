@@ -77,3 +77,10 @@ if __name__ == "__main__":
 
     print(f"Random sequence 'e': {e}")
     print(f"q: {q}")
+
+    w: int = random.randint(1,q-1) # choose a random integer w between 1 and q-1
+    print(f"w: {w}")
+    while math.gcd(w,q) != 1:
+        # if w and q are not coprime, choose another random integer w
+        w = random.randint(1,q-1)
+        print(f"w: {w}")
