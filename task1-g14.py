@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
-"""F20CN CW2 Task 1
-   Nov 2023
+"""
+This script is part of the F20CN CW2 Task 1. It includes a function to create a random sequence of
+integers, where each subsequent integer is the sum of all previous integers in the sequence plus a
+new random integer.
+This sequence can be used as a public key in cryptographic operations.
 
-   @author: Chandrashekhar Ramaprasad - cr2007
+@author: CHANDRASHEKHAR RAMAPRASAD (cr2007)
+@date: November 11, 2023
 """
 
+# Importing required libraries
 import random
 import math
 
@@ -59,6 +64,7 @@ def is_prime(number: int) -> bool:
     return True
 
 
+# Main function
 if __name__ == "__main__":
     # Create a random sequence of integers
     e: list = create_random_sequence()
