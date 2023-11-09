@@ -52,11 +52,11 @@ def is_prime(number: int) -> bool:
     bool: True if the number is prime, False otherwise.
     """
     # 1 and 2 are not considered prime numbers in this implementation
-    if number in [1,2]:
+    if (number in [1,2]) or (number % 2 == 0):
         return False
 
     # Check divisibility for all numbers up to the square root of the input number
-    for i in range(2, int(math.sqrt(number))+1):
+    for i in range(3, int(math.sqrt(number))+1, 2):
         # If the number is divisible by any number in the range, it's not prime
         if number % i == 0:
             return False
