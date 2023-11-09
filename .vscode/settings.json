@@ -15,4 +15,6 @@
 	},
 	"diffEditor.ignoreTrimWhitespace": false,
 	"diffEditor.hideUnchangedRegions.enabled": true,
+	"audioCues.terminalCommandFailed": "on",
+	"audioCues.format": "userGesture"
 }
