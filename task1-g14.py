@@ -40,6 +40,7 @@ def create_random_sequence(sequence_length: int = 8) -> list:
     # Return the random sequence
     return random_sequence
 
+# Source: https://www.geeksforgeeks.org/python-program-to-check-whether-a-number-is-prime-or-not/
 def is_prime(number: int) -> bool:
     """
     Checks if a number is prime or not.
