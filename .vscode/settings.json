@@ -13,4 +13,6 @@
 	"[python]": {
 		"editor.rulers": [100]
 	},
+	"diffEditor.ignoreTrimWhitespace": false,
+	"diffEditor.hideUnchangedRegions.enabled": true,
 }
