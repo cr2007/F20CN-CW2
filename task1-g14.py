@@ -64,6 +64,24 @@ def is_prime(number: int) -> bool:
     # If no divisors found, the number is prime
     return True
 
+def calculate_public_key(e_list: list, q_int: int, w_int: int) -> list:
+    """
+    Calculates the public key from the given parameters.
+
+    Parameters:
+    - e (list): The random sequence of integers.
+    - q (int): The random prime number.
+    - w (int): The random integer.
+
+    Returns:
+    - list: The public key.
+    """
+    # Calculate the public key
+    h: list = [ (w_int * i) % q_int for i in e_list ]
+
+    # Return the public key
+    return h
+
 
 # Main function
 if __name__ == "__main__":
@@ -86,6 +104,6 @@ if __name__ == "__main__":
         w = random.randint(1,q-1)
         print(f"w: {w}")
 
+    public_key: list = calculate_public_key(e,q,w)
     # Calculate the public key
-    h: list = [ (w * i) % q for i in e ]
-    print(f"Public key: {h}")
+    print(f"Public key: {public_key}")
