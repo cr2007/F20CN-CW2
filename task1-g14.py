@@ -82,6 +82,38 @@ def calculate_public_key(e_list: list, q_int: int, w_int: int) -> list:
     # Return the public key
     return h
 
+def encryption(plain_text_list: list, public_key_list: list) -> list:
+    """
+    This function encrypts a list of plain text values using a public key.
+
+    Args:
+        plain_text_list (list): The plain text values to be encrypted.
+        public_key_list (list): The public key used for encryption.
+
+    Returns:
+        list: The encrypted text.
+    """
+    # Initialize an empty list to hold the encrypted text
+    encrypted_text: list = []
+
+    # Loop through every value in the plain text
+    for value in plain_text_list:
+        # Initialize a variable to hold the sum of the cipher text
+        cipher_text_sum: int = 0
+
+        # Loop through every bit in the value
+        for i, bit in enumerate(value):
+            if bit == '1':
+                # If the bit is '1', multiply it with the corresponding value in the public key
+                cipher_text_sum += int(bit) * public_key_list[i]
+
+        # Append the sum of the cipher text to the encrypted text list
+        encrypted_text.append(cipher_text_sum)
+        print(f"Sum: {cipher_text_sum}")
+
+    # Return the encrypted text
+    return encrypted_text
+
 
 # Main function
 if __name__ == "__main__":
@@ -124,3 +156,8 @@ if __name__ == "__main__":
 
     # Calculate the public key
     print(f"Public key: {public_key}")
+
+    # Encrypt the plain text
+    cipher_text: list = encryption(plain_text, public_key)
+
+    print(f"Cipher Text: {cipher_text}")
