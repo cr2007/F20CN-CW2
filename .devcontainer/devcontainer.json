@@ -1,7 +1,8 @@
 {
 	"name": "F20CN Container",
 	"build": {
-		"dockerfile": "Dockerfile"
+		"dockerfile": "Dockerfile",
+		"context": "."
 	},
 	// "image": "mcr.microsoft.com/devcontainers/python:3",
 	"customizations": {
