@@ -41,5 +41,7 @@
 			}
 		}
 	},
-	"postStartCommand": "git lfs checkout"
+	"postStartCommand": "git lfs checkout",
+
+	"remoteUser": "group-14"
 }
