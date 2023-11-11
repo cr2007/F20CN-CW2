@@ -121,7 +121,7 @@ if __name__ == "__main__":
     input_text = input("Enter the plain text: ")
 
     # Convert the input text to binary
-    input_binary: str = ''.join(format(ord(i), '08b') for i in input_text) # pylint: disable=invalid-name
+    input_binary: str = ''.join(format(ord(i), '08b') for i in input_text)
 
     # Split it into a list of 8-bit chunks
     plain_text: list = [ input_binary[i:i+8] for i in range(0,len(input_binary),8) ]
