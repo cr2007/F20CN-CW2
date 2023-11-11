@@ -35,7 +35,10 @@
 				"VisualStudioExptTeam.vscodeintellicode",
 				"ms-vsliveshare.vsliveshare",
 				"EditorConfig.EditorConfig"
-			]
+			],
+			"settings": {
+				"python.defaultInterpreterPath": "/usr/local/bin/python"
+			}
 		}
 	},
 	"postStartCommand": "git lfs checkout"
