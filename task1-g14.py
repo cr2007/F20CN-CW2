@@ -51,8 +51,8 @@ def is_prime(number: int) -> bool:
     Returns:
     bool: True if the number is prime, False otherwise.
     """
-    # 1 and 2 are not considered prime numbers in this implementation
-    if (number in [1,2]) or (number % 2 == 0):
+
+    if (number % 2 == 0):
         return False
 
     # Check divisibility for all numbers up to the square root of the input number
