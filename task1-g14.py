@@ -104,7 +104,7 @@ def encryption(plain_text_list: list, public_key_list: list) -> list:
         # Loop through every bit in the value
         for i, bit in enumerate(value):
             # If the bit is '1', multiply it with the corresponding value in the public key
-            cipher_text_sum += int(bit) * public_key_list[i] if bit == '1' else 0
+            cipher_text_sum += (int(bit) * public_key_list[i]) if bit == '1' else 0
 
         # Append the sum of the cipher text to the encrypted text list
         encrypted_text.append(cipher_text_sum)
