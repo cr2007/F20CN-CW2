@@ -33,7 +33,7 @@
 			}
 		}
 	},
-	"postStartCommand": "git lfs checkout",
+	"postStartCommand": "git lfs checkout ; pip install -r requirements.txt",
 
 	"remoteUser": "group-14"
 }
