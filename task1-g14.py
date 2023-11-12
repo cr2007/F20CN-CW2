@@ -144,7 +144,7 @@ if __name__ == "__main__":
         w = random.randint(1,q-1)
         print(f"w: {w}")
 
-    # Calculate the public key
+    # Calculate the public key (h)
     public_key: list = calculate_public_key(e,q,w)
 
     # Dictionary to store private key: (e,q,w)
