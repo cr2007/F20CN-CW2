@@ -1,7 +1,9 @@
+# All files
 [*]
 indent_style = tab
 indent_size = 4
 
+# Python files
 [*.py]
 indent_style = space
 indent_size = 4
