@@ -132,13 +132,10 @@ if __name__ == "__main__":
     e: list = create_random_sequence()
 
     # Choose a random prime number
-    q: int = 2 * e[-1] + random.randint(1,1000)
+    q: int = (2 * e[-1]) + random.randint(1,1000)
     while not is_prime(q): # check if q is prime
         # if not, choose another random prime number
-        q = 2 * e[-1] + random.randint(1,1000)
-
-    print(f"Random sequence 'e': {e}")
-    print(f"q: {q}")
+        q = (2 * e[-1]) + random.randint(1,1000)
 
     w: int = random.randint(1,q+250) # choose a random integer w between 1 and q-1
     print(f"w: {w}")
