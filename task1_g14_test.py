@@ -20,3 +20,7 @@ class TestPrimeNumber:
     def testPrimeNumber4(self):
         self.value = 53164652
         assert is_prime(self.value) == False
+
+    def testPrimeNumber5(self):
+        self.value = 8768755
+        assert is_prime(self.value) == False
