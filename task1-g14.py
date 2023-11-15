@@ -151,4 +151,4 @@ if __name__ == "__main__":
     # Encrypt the plain text
     cipher_text: list = encryption(plain_text, public_key)
 
-    print(f"Cipher Text: {cipher_text}")
+    print(f"Cipher Text: {sum(cipher_text)}")
