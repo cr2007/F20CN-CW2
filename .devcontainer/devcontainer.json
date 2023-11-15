@@ -16,6 +16,7 @@
 			"extensions": [
 				"eamodio.gitlens",
 				"ms-python.python",
+				"ms-python.pylint",
 				"vscode-icons-team.vscode-icons",
 				"mathematic.vscode-pdf",
 				"njpwerner.autodocstring",
