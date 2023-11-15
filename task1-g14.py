@@ -112,6 +112,47 @@ def encryption(plain_text_list: list, public_key_list: list) -> list:
     # Return the encrypted text
     return encrypted_text
 
+def decryption(ciphertext: list, private_key_dict: dict) -> str:
+
+    # Get the values from the private key dictionary
+    e_list = private_key_dict["e"]
+    q_int  = private_key_dict["q"]
+    w_int  = private_key_dict["w"]
+
+    # Calculate w^-1
+    w_inv: int = pow(w_int, -1, q_int)
+
+    # Initialize an empty string to hold the plain text bits
+    plain_text_bits: str = ""
+
+    # Loop through every value in the cipher text
+    for c in ciphertext:
+        # Calculate c'
+        c_prime: int = (c * w_inv) % q_int
+
+        # Initialize an empty string to hold the bits
+        bits: str = ""
+
+        # Loop through every value in the random sequence
+        for e_n in reversed(e_list):
+            # If c' is greater than or equal to the value
+            # in the random sequence, append '1' to the bits
+            if c_prime >= e_n:
+                bits = '1' + bits # append '1' to the bits
+                c_prime -= e_n    # subtract the value from c'
+            else:
+                bits = '0' + bits # append '0' to the bits
+
+        # Append the bits to the plain text bits
+        plain_text_bits += bits
+
+    # Convert the binary string to text
+    plain_text_str: str = ''.join(chr(int(plain_text_bits[i:i+8], 2))
+                              for i in range(0, len(plain_text_bits), 8))
+
+    # Return the plain text
+    return plain_text_str
+
 
 # Main function
 if __name__ == "__main__":
@@ -152,3 +193,7 @@ if __name__ == "__main__":
     cipher_text: list = encryption(plain_text, public_key)
 
     print(f"Cipher Text: {sum(cipher_text)}")
+
+    # Decrypt the cipher text
+    decrypted_text: str = decryption(cipher_text, private_key)
+    print(f"Decrypted Text: {decrypted_text}")
