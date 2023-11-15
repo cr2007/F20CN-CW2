@@ -4,7 +4,6 @@
 		"dockerfile": "Dockerfile",
 		"context": "."
 	},
-	// "image": "mcr.microsoft.com/devcontainers/python:3",
 	"features": {
 		"ghcr.io/devcontainers/features/common-utils:2": {
 			"installZsh": "true",
