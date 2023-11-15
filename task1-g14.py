@@ -111,7 +111,7 @@ def encryption(plain_text_list: list, public_key_list: list) -> list:
         print(f"Sum: {cipher_text_sum}")
 
     # Return the encrypted text
-    return sum(encrypted_text)
+    return encrypted_text
 
 
 # Main function
