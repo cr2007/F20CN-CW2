@@ -187,8 +187,6 @@ if __name__ == "__main__":
     # Dictionary to store private key: (e,q,w)
     private_key: dict = { "e": e, "q": q, "w": w }
 
-    # Calculate the public key
-
     # Encrypt the plain text
     cipher_text: list = encryption(plain_text, public_key)
 
