@@ -52,7 +52,7 @@ def is_prime(number: int) -> bool:
     bool: True if the number is prime, False otherwise.
     """
 
-    if (number % 2 == 0):
+    if number % 2 == 0:
         return False
 
     # Check divisibility for all numbers up to the square root of the input number
