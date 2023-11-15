@@ -165,8 +165,6 @@ if __name__ == "__main__":
     # Split it into a list of 8-bit chunks
     plain_text: list = [ input_binary[i:i+8] for i in range(0,len(input_binary),8) ]
 
-    # Print the binary representation, separating every 8 bits with a space
-
     # Create a random sequence of integers
     e: list = create_random_sequence()
 
