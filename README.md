@@ -20,4 +20,4 @@ Team Members:
   - [X] and computes $h = (h_1, h_2, \dots, h_n)$ where $h_i = we_i \text{mod} q$ for $1 \leq i \leq n$.
 - [X] Encrypting an $n$-bit message $m = (m_1, m_2, \dots, m_n)$
   - [X] Compute $c = h_1m_1 + h_2m_2 + \dots + h_nm_n$
-- [ ] Decrypting ciphertext $c$
+- [X] Decrypting ciphertext $c$
