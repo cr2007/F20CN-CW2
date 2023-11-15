@@ -152,6 +152,6 @@ if __name__ == "__main__":
     print(f"Public key: {public_key}")
 
     # Encrypt the plain text
-    cipher_text: int = encryption(plain_text, public_key)
+    cipher_text: list = encryption(plain_text, public_key)
 
     print(f"Cipher Text: {cipher_text}")
