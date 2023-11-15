@@ -108,7 +108,6 @@ def encryption(plain_text_list: list, public_key_list: list) -> list:
 
         # Append the sum of the cipher text to the encrypted text list
         encrypted_text.append(cipher_text_sum)
-        print(f"Sum: {cipher_text_sum}")
 
     # Return the encrypted text
     return encrypted_text
@@ -126,7 +125,6 @@ if __name__ == "__main__":
     plain_text: list = [ input_binary[i:i+8] for i in range(0,len(input_binary),8) ]
 
     # Print the binary representation, separating every 8 bits with a space
-    print(f"Binary representation: {plain_text}")
 
     # Create a random sequence of integers
     e: list = create_random_sequence()
@@ -149,7 +147,6 @@ if __name__ == "__main__":
     private_key: dict = { "e": e, "q": q, "w": w }
 
     # Calculate the public key
-    print(f"Public key: {public_key}")
 
     # Encrypt the plain text
     cipher_text: list = encryption(plain_text, public_key)
