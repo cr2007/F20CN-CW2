@@ -82,7 +82,7 @@ def calculate_public_key(e_list: list, q_int: int, w_int: int) -> list:
     # Return the public key
     return h
 
-def encryption(plain_text_list: list, public_key_list: list):
+def encryption(plain_text_list: list, public_key_list: list) -> list:
     """
     This function encrypts a list of plain text values using a public key.
 
