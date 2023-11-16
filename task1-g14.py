@@ -125,9 +125,9 @@ def decryption(ciphertext: list, private_key_dict: dict) -> str:
     """
 
     # Extracting the values from the private key dictionary
-    e_list = private_key_dict["e"]
-    q_int  = private_key_dict["q"]
-    w_int  = private_key_dict["w"]
+    e_list: list = private_key_dict["e"]
+    q_int: int   = private_key_dict["q"]
+    w_int: int   = private_key_dict["w"]
 
     # Calculating the multiplicative inverse of w modulo q
     w_inv: int = pow(w_int, -1, q_int)
