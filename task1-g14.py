@@ -156,8 +156,17 @@ def decryption(ciphertext: list, private_key_dict: dict) -> str:
 
 # Main function
 if __name__ == "__main__":
+
     # Get the input text from the user
-    input_text = input("Enter the plain text: ")
+    input_text = ""
+    while True:
+        line = input("Enter a line of plain text (press Enter for a new line, or just press Enter to finish): ")
+        if line == "":
+            break
+        input_text += line + " "
+
+    # Remove trailing whitespace and '\n' characters
+    input_text = input_text.rstrip()
 
     # Convert the input text to binary
     input_binary: str = ''.join(format(ord(i), '08b') for i in input_text)
