@@ -113,44 +113,53 @@ def encryption(plain_text_list: list, public_key_list: list) -> list:
     return encrypted_text
 
 def decryption(ciphertext: list, private_key_dict: dict) -> str:
+    """
+    This function decrypts a given ciphertext using a private key dictionary.
 
-    # Get the values from the private key dictionary
+    Parameters:
+    ciphertext (list): The ciphertext to be decrypted.
+    private_key_dict (dict): The private key dictionary containing 'e', 'q', and 'w' keys.
+
+    Returns:
+    str: The decrypted plaintext.
+    """
+
+    # Extracting the values from the private key dictionary
     e_list = private_key_dict["e"]
     q_int  = private_key_dict["q"]
     w_int  = private_key_dict["w"]
 
-    # Calculate w^-1
+    # Calculating the multiplicative inverse of w modulo q
     w_inv: int = pow(w_int, -1, q_int)
 
-    # Initialize an empty string to hold the plain text bits
+    # Initializing an empty string to hold the plain text bits
     plain_text_bits: str = ""
 
-    # Loop through every value in the cipher text
+    # Looping through every value in the cipher text
     for c in ciphertext:
-        # Calculate c'
+        # Calculating c' which is the product of c and w_inv modulo q
         c_prime: int = (c * w_inv) % q_int
 
-        # Initialize an empty string to hold the bits
+        # Initializing an empty string to hold the bits
         bits: str = ""
 
-        # Loop through every value in the random sequence
+        # Looping through every value in the random sequence in reverse order
         for e_n in reversed(e_list):
-            # If c' is greater than or equal to the value
-            # in the random sequence, append '1' to the bits
+            # If c' is greater than or equal to the value in the random sequence
             if c_prime >= e_n:
                 bits = '1' + bits # append '1' to the bits
                 c_prime -= e_n    # subtract the value from c'
             else:
                 bits = '0' + bits # append '0' to the bits
 
-        # Append the bits to the plain text bits
+        # Appending the bits to the plain text bits
         plain_text_bits += bits
 
-    # Convert the binary string to text
+    # Converting the binary string to text
     plain_text_str: str = ''.join(chr(int(plain_text_bits[i:i+8], 2))
                               for i in range(0, len(plain_text_bits), 8))
 
-    # Return the plain text
+    # Returning the plain text
     return plain_text_str
 
 
