@@ -167,7 +167,7 @@ def decryption(ciphertext: list, private_key_dict: dict) -> str:
 if __name__ == "__main__":
 
     # Get the input text from the user
-    input_text = ""
+    input_text: str = ""
     while True:
         line = input("Enter a line of plain text (press Enter for a new line, or just press Enter to finish): ")
         if line == "":
