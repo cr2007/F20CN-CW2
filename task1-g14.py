@@ -173,7 +173,8 @@ if __name__ == "__main__":
     while True:
         # Prompt the user to enter a line of plain text
         # The user can press Enter for a new line, or just press Enter to finish
-        line = input("Enter a line of plain text (press Enter for a new line, or just press Enter to finish): ")
+        line = input("Enter a line of plain text "
+                    "(press Enter for a new line, or just press Enter to finish): ")
 
         # If the user just presses Enter (i.e., the input line is empty), break the loop
         if line == "":
