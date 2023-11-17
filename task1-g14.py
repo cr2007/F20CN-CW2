@@ -26,6 +26,10 @@ def create_random_sequence(sequence_length: int = 8) -> list:
     Returns:
     list: The generated sequence of integers.
     """
+
+    if sequence_length <= 0:
+        raise ValueError("Sequence length must be greater than 0.")
+
     # Initialize the sequence with a random integer between 1 and 100
     random_sequence: list = [ random.randint(1,100) ]
 
@@ -51,6 +55,9 @@ def is_prime(number: int) -> bool:
     Returns:
     bool: True if the number is prime, False otherwise.
     """
+
+    if number <= 1:
+        raise ValueError("Number must be greater than 1.")
 
     if number % 2 == 0:
         return False
@@ -78,6 +85,15 @@ def calculate_public_key(e_list: list, q_int: int, w_int: int) -> list:
     ### Returns:
     - list: The public key, calculated as described above.
     """
+
+    # Check if the random sequence is empty
+    if not e_list:
+        raise ValueError("Random sequence cannot be empty.")
+
+    # Check if q and w are greater than 0
+    if q_int <= 0 or w_int <= 0:
+        raise ValueError("q and w must be greater than 0.")
+
     # Calculate the public key
     h: list = [ (w_int * i) % q_int for i in e_list ]
 
@@ -126,6 +142,11 @@ def decryption(ciphertext: list, private_key_dict: dict) -> str:
     str: The decrypted plaintext.
     """
 
+    if not ciphertext:
+        raise ValueError("Ciphertext cannot be empty")
+    if not all(key in private_key_dict for key in ("e", "q", "w")):
+        raise ValueError("private_key_dict must contain the keys 'e', 'q', and 'w'")
+
     # Extracting the values from the private key dictionary
     e_list: list = private_key_dict["e"]
     q_int: int   = private_key_dict["q"]
@@ -168,57 +189,63 @@ def decryption(ciphertext: list, private_key_dict: dict) -> str:
 # Main function
 if __name__ == "__main__":
 
-    # Initialize an empty string to store the user's input
-    input_text: str = ""
+    try:
 
-    # Start an infinite loop to continuously get input from the user
-    while True:
-        # Prompt the user to enter a line of plain text
-        # The user can press Enter for a new line, or just press Enter to finish
-        line = input("Enter a line of plain text "
-                    "(press Enter for a new line, or just press Enter to finish): ")
+        # Initialize an empty string to store the user's input
+        input_text: str = ""
 
-        # If the user just presses Enter (i.e., the input line is empty), break the loop
-        if line == "":
-            break
+        # Start an infinite loop to continuously get input from the user
+        while True:
+            # Prompt the user to enter a line of plain text
+            # The user can press Enter for a new line, or just press Enter to finish
+            line = input("Enter a line of plain text "
+                        "(press Enter for a new line, or just press Enter to finish): ")
 
-        # Add the input line to the input_text string, followed by a space
-        input_text += line + " "
+            # If the user just presses Enter (i.e., the input line is empty), break the loop
+            if line == "":
+                break
 
-    # Remove trailing whitespace and '\n' characters
-    input_text = input_text.rstrip()
+            # Add the input line to the input_text string, followed by a space
+            input_text += line + " "
 
-    # Convert the input text to binary
-    input_binary: str = ''.join(format(ord(i), '08b') for i in input_text)
+        # Remove trailing whitespace and '\n' characters
+        input_text = input_text.rstrip()
 
-    # Split it into a list of 8-bit chunks
-    plain_text: list = [ input_binary[i:i+8] for i in range(0,len(input_binary),8) ]
+        # Convert the input text to binary
+        input_binary: str = ''.join(format(ord(i), '08b') for i in input_text)
 
-    # Create a random sequence of integers
-    e: list = create_random_sequence()
+        # Split it into a list of 8-bit chunks
+        plain_text: list = [ input_binary[i:i+8] for i in range(0,len(input_binary),8) ]
 
-    # Choose a random prime number
-    q: int = (2 * e[-1]) + random.randint(1,1000)
-    while not is_prime(q): # check if q is prime
-        # if not, choose another random prime number
-        q = (2 * e[-1]) + random.randint(1,1000)
+        # Create a random sequence of integers
+        e: list = create_random_sequence()
 
-    w: int = random.randint(1,q+250) # choose a random integer w between 1 and q-1
-    while math.gcd(w,q) != 1:
-        # if w and q are not coprime, choose another random integer w
-        w = random.randint(1,q-1)
+        # Choose a random prime number
+        q: int = (2 * e[-1]) + random.randint(1,1000)
+        while not is_prime(q): # check if q is prime
+            # if not, choose another random prime number
+            q = (2 * e[-1]) + random.randint(1,1000)
 
-    # Calculate the public key (h)
-    public_key: list = calculate_public_key(e,q,w)
+        w: int = random.randint(1,q+250) # choose a random integer w between 1 and q-1
+        while math.gcd(w,q) != 1:
+            # if w and q are not coprime, choose another random integer w
+            w = random.randint(1,q-1)
 
-    # Dictionary to store private key: (e,q,w)
-    private_key: dict = { "e": e, "q": q, "w": w }
+        # Calculate the public key (h)
+        public_key: list = calculate_public_key(e,q,w)
 
-    # Encrypt the plain text
-    cipher_text: list = encryption(plain_text, public_key)
+        # Dictionary to store private key: (e,q,w)
+        private_key: dict = { "e": e, "q": q, "w": w }
 
-    print(f"Cipher Text: {sum(cipher_text)}")
+        # Encrypt the plain text
+        cipher_text: list = encryption(plain_text, public_key)
 
-    # Decrypt the cipher text
-    decrypted_text: str = decryption(cipher_text, private_key)
-    print(f"Decrypted Text: {decrypted_text}")
+        print(f"Cipher Text: {sum(cipher_text)}")
+
+        # Decrypt the cipher text
+        decrypted_text: str = decryption(cipher_text, private_key)
+        print(f"Decrypted Text: {decrypted_text}")
+    except Exception as e:
+        print(f"Error occurred: {e}")
+    finally:
+        print("Exiting...")
