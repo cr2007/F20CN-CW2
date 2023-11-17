@@ -148,9 +148,14 @@ def decryption(cipher_text_list: list, private_key_dict: dict) -> str:
     str: The decrypted plaintext.
     """
 
+    # Check if the ciphertext list is empty
     if not cipher_text_list:
+        # If it is, raise a ValueError with a suitable message
         raise ValueError("Ciphertext cannot be empty")
+
+    # Check if the private_key_dict contains all the necessary keys: 'e', 'q', and 'w'
     if not all(key in private_key_dict for key in ("e", "q", "w")):
+        # If it doesn't, raise a ValueError with a suitable message
         raise ValueError("private_key_dict must contain the keys 'e', 'q', and 'w'")
 
     # Extracting the values from the private key dictionary
