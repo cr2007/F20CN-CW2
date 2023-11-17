@@ -7,15 +7,15 @@ class TestPrimeNumber:
 
     def testPrimeNumber1(self):
         self.value = 7
-        assert is_prime(self.value) == True
+        assert is_prime(self.value)
 
     def testPrimeNumber2(self):
         self.value = 11
-        assert is_prime(self.value) == True
+        assert is_prime(self.value)
 
     def testPrimeNumber3(self):
         self.value = 467586793
-        assert is_prime(self.value) == True
+        assert is_prime(self.value)
 
     def testPrimeNumber4(self):
         self.value = 53164652
@@ -27,8 +27,8 @@ class TestPrimeNumber:
 
     def testPrimeNumber5(self):
         self.value = 2324521457
-        assert is_prime(self.value) == True
+        assert is_prime(self.value)
 
     def testPrimeNumber6(self):
         self.value = 2848637806241
-        assert is_prime(self.value) == True
+        assert is_prime(self.value)
