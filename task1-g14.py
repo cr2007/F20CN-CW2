@@ -17,14 +17,20 @@ import math
 
 def create_random_sequence(sequence_length: int = 8) -> list:
     """
-    Creates a random sequence of integers where each subsequent integer is the sum of all previous
-    integers in the sequence plus a new random integer.
+    Creates a random sequence of integers. The first integer is a random number between 1 and 100.
+    Each subsequent integer in the sequence is the sum of all previous integers plus a new random
+    integer between 1 and 100.
 
-    Parameters:
-    sequence_length (int): The length of the sequence to be generated. Default is 8.
+    ### Parameters:
+    - `sequence_length` (int): The length of the sequence to be generated. Default is 8.\n
+    If the `sequence_length` is less than or equal to 0, a ValueError is raised.
 
-    Returns:
-    list: The generated sequence of integers.
+    ### Returns:
+    - list: The generated sequence of integers. The length of the list is equal to `sequence_length`.
+    Each element in the list is an integer.
+
+    ### Raises:
+    - ValueError: If `sequence_length` is less than or equal to 0.
     """
 
     if sequence_length <= 0:
@@ -47,13 +53,24 @@ def create_random_sequence(sequence_length: int = 8) -> list:
 # Source: https://www.geeksforgeeks.org/python-program-to-check-whether-a-number-is-prime-or-not/
 def is_prime(number: int) -> bool:
     """
-    Checks if a number is prime or not.
+    Checks if a number is prime or not. A prime number is a natural number greater than 1 that has
+    no positive divisors other than 1 and itself.
 
-    Parameters:
-    number (int): The number to be checked.
+    The function first checks if the number is less than or equal to 1, and if so, raises a
+    ValueError. Then it checks if the number is divisible by 2, and if so, returns False.
 
-    Returns:
-    bool: True if the number is prime, False otherwise.
+    Finally, it checks divisibility for all odd numbers up to the square root of the input number.
+    If the number is divisible by any of these, it returns False. If no divisors are found, it
+    returns True.
+
+    ### Parameters:
+    - `number` (int): The number to be checked. Must be greater than 1.
+
+    ### Returns:
+    - bool: True if the number is prime, False otherwise.
+
+    ### Raises:
+    - ValueError: If the input number is less than or equal to 1.
     """
 
     if number <= 1:
@@ -84,6 +101,9 @@ def calculate_public_key(e_list: list, q_int: int, w_int: int) -> list:
 
     ### Returns:
     - list: The public key, calculated as described above.
+
+    ### Raises:
+    - ValueError: If the random sequence (`e`) is empty or if `q` or `w` are not greater than 0.
     """
 
     # Check if the random sequence is empty
@@ -102,14 +122,24 @@ def calculate_public_key(e_list: list, q_int: int, w_int: int) -> list:
 
 def encryption(plain_text_list: list, public_key_list: list) -> list:
     """
-    This function encrypts a list of plain text values using a public key.
+    Encrypts a list of binary plain text values using a public key.
 
-    Parameters:
-        plain_text_list (list): The plain text values to be encrypted.
-        public_key_list (list): The public key used for encryption.
+    Each binary value in the plain text list is encrypted by multiplying each bit by the
+    corresponding value in the public key and summing the results.
 
-    Returns:
-        list: The encrypted text.
+    The function raises a ValueError if the plain text list or the public key list is empty.
+
+    ### Parameters:
+    - `plain_text_list` (list): The plain text values to be encrypted. Each value should be a string
+    of binary digits.
+    - `public_key_list` (list): The public key used for encryption. Each key should be an integer.
+
+    ### Returns:
+    - list: The encrypted text, represented as a list of integers. Each integer is the encrypted form
+    of the corresponding binary value in the plain text list.
+
+    ### Raises:
+    - ValueError: If the plain text list or the public key list is empty.
     """
 
     if not plain_text_list:
@@ -138,14 +168,28 @@ def encryption(plain_text_list: list, public_key_list: list) -> list:
 
 def decryption(cipher_text_list: list, private_key_dict: dict) -> str:
     """
-    This function decrypts a given ciphertext using a private key dictionary.
+    Decrypts a given ciphertext using a private key dictionary.
 
-    Parameters:
-    ciphertext (list): The ciphertext to be decrypted.
-    private_key_dict (dict): The private key dictionary containing 'e', 'q', and 'w' keys.
+    The private key dictionary should contain 'e', 'q', and 'w' keys. The function first checks if
+    the ciphertext and private key are valid. Then it calculates the multiplicative inverse of 'w'
+    modulo 'q'.
 
-    Returns:
-    str: The decrypted plaintext.
+    It then loops through each value in the ciphertext, calculates `c'` (the product of `c` and
+    `w_inv` modulo q), and generates the corresponding binary string.
+
+    Finally, it converts the binary string to text and returns it.
+
+    ### Parameters:
+    - `cipher_text_list` (list): The ciphertext to be decrypted. Each value should be an integer.
+    - `private_key_dict` (dict): The private key dictionary containing 'e', 'q', and 'w' keys. `e`
+    should be a list of integers, `q` and `w` should be integers.
+
+    ### Returns:
+    - str: The decrypted plaintext.
+
+    ### Raises:
+    - ValueError: If the ciphertext is empty or if the private key dictionary does not contain the
+    keys 'e', 'q', and 'w'.
     """
 
     # Check if the ciphertext list is empty
