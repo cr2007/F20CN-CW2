@@ -66,15 +66,17 @@ def is_prime(number: int) -> bool:
 
 def calculate_public_key(e_list: list, q_int: int, w_int: int) -> list:
     """
-    Calculates the public key from the given parameters.
+    This function calculates the public key based on a given random sequence of integers, a random
+    prime number, and a random integer. The public key is calculated as `(w * i) mod q` for each
+    integer `i` in the random sequence.
 
-    Parameters:
-    - e (list): The random sequence of integers.
-    - q (int): The random prime number.
-    - w (int): The random integer.
+    ### Parameters:
+    - `e_list` (list): The random sequence of integers.
+    - `q_int` (int): The random prime number.
+    - `w_int` (int): The random integer.
 
-    Returns:
-    - list: The public key.
+    ### Returns:
+    - list: The public key, calculated as described above.
     """
     # Calculate the public key
     h: list = [ (w_int * i) % q_int for i in e_list ]
