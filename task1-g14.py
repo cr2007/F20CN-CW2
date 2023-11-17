@@ -166,12 +166,20 @@ def decryption(ciphertext: list, private_key_dict: dict) -> str:
 # Main function
 if __name__ == "__main__":
 
-    # Get the input text from the user
+    # Initialize an empty string to store the user's input
     input_text: str = ""
+
+    # Start an infinite loop to continuously get input from the user
     while True:
+        # Prompt the user to enter a line of plain text
+        # The user can press Enter for a new line, or just press Enter to finish
         line = input("Enter a line of plain text (press Enter for a new line, or just press Enter to finish): ")
+
+        # If the user just presses Enter (i.e., the input line is empty), break the loop
         if line == "":
             break
+
+        # Add the input line to the input_text string, followed by a space
         input_text += line + " "
 
     # Remove trailing whitespace and '\n' characters
