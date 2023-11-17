@@ -111,6 +111,12 @@ def encryption(plain_text_list: list, public_key_list: list) -> list:
     Returns:
         list: The encrypted text.
     """
+
+    if not plain_text_list:
+        raise ValueError("Plain Text cannot be empty.")
+    elif not public_key_list:
+        raise ValueError("Public Key List cannot be empty.")
+
     # Initialize an empty list to hold the encrypted text
     encrypted_text: list = []
 
