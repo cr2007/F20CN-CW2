@@ -136,7 +136,7 @@ def encryption(plain_text_list: list, public_key_list: list) -> list:
     # Return the encrypted text
     return encrypted_text
 
-def decryption(ciphertext: list, private_key_dict: dict) -> str:
+def decryption(cipher_text_list: list, private_key_dict: dict) -> str:
     """
     This function decrypts a given ciphertext using a private key dictionary.
 
@@ -148,7 +148,7 @@ def decryption(ciphertext: list, private_key_dict: dict) -> str:
     str: The decrypted plaintext.
     """
 
-    if not ciphertext:
+    if not cipher_text_list:
         raise ValueError("Ciphertext cannot be empty")
     if not all(key in private_key_dict for key in ("e", "q", "w")):
         raise ValueError("private_key_dict must contain the keys 'e', 'q', and 'w'")
@@ -165,7 +165,7 @@ def decryption(ciphertext: list, private_key_dict: dict) -> str:
     plain_text_bits: str = ""
 
     # Looping through every value in the cipher text
-    for c in ciphertext:
+    for c in cipher_text_list:
         # Calculating c' which is the product of c and w_inv modulo q
         c_prime: int = (c * w_inv) % q_int
 
