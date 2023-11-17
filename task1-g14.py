@@ -88,7 +88,7 @@ def encryption(plain_text_list: list, public_key_list: list) -> list:
     """
     This function encrypts a list of plain text values using a public key.
 
-    Args:
+    Parameters:
         plain_text_list (list): The plain text values to be encrypted.
         public_key_list (list): The public key used for encryption.
 
