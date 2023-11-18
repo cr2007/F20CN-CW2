@@ -1,13 +1,5 @@
 #!/usr/bin/env python3
-"""
-This script is part of the F20CN CW2 Task 1. It includes a function to create a random sequence of
-integers, where each subsequent integer is the sum of all previous integers in the sequence plus a
-new random integer.
-This sequence can be used as a public key in cryptographic operations.
 
-@author: CHANDRASHEKHAR RAMAPRASAD (cr2007)
-@date: November 11, 2023
-"""
 
 # Importing required libraries
 import random
@@ -19,7 +11,7 @@ class PublicKey:
         self.q: int = private_key_dict["q"]
         self.w: int = private_key_dict["w"]
 
-    def calculate_public_key(self) -> list:
+    def calculate_public_key(self) -> list[int]:
         """
         This function calculates the public key based on a given random sequence of integers, a
         random prime number, and a random integer. The public key is calculated as `(w * i) mod q`
@@ -53,7 +45,7 @@ class PublicKey:
 
 class PrivateKey:
     def __init__(self):
-        self.e: list = []
+        self.e: list[int] = []
         self.q: int = 0
         self.w: int = 0
         self.private_key: dict = {}
@@ -80,7 +72,7 @@ class PrivateKey:
         # Return the private key
         return self.private_key
 
-    def create_random_sequence(self, sequence_length: int = 8) -> list:
+    def create_random_sequence(self, sequence_length: int = 8) -> list[int]:
         """
         Creates a random sequence of integers. The first integer is a random number between 1 and
         100.
@@ -104,7 +96,7 @@ class PrivateKey:
             raise ValueError("Sequence length must be greater than 0.")
 
         # Initialize the sequence with a random integer between 1 and 100
-        random_sequence: list = [ random.randint(1,100) ]
+        random_sequence: list[int] = [ random.randint(1,100) ]
 
         # Generate the rest of the sequence
         while len(random_sequence) < sequence_length:
@@ -157,12 +149,12 @@ class PrivateKey:
         return True
 
 class Encryption:
-    def __init__(self, public_key_list: list, plain_text_list: list) -> None:
-        self.public_key: list = public_key_list
-        self.plain_text: list = plain_text_list
-        self.cipher_text: list = []
+    def __init__(self, public_key_list: list[int], plain_text_list: list[str]) -> None:
+        self.public_key: list[int] = public_key_list
+        self.plain_text: list[str] = plain_text_list
+        self.cipher_text: list[int] = []
 
-    def encryption(self) -> list:
+    def encryption(self) -> list[int]:
         """
         Encrypts a list of binary plain text values using a public key.
 
@@ -191,7 +183,7 @@ class Encryption:
             raise ValueError("Public Key List cannot be empty.")
 
         # Initialize an empty list to hold the encrypted text
-        encrypted_text: list = []
+        encrypted_text: list[int] = []
 
         # Loop through every value in the plain text
         for value in self.plain_text:
@@ -210,10 +202,10 @@ class Encryption:
         return encrypted_text
 
 class Decryption:
-    def __init__(self, cipher_text_list: list, private_key_dict: dict) -> None:
-        self.cipher_text: list = cipher_text_list
-        self.private_key = private_key_dict
-        self.e: list = private_key_dict["e"]
+    def __init__(self, cipher_text_list: list[int], private_key_dict: dict):
+        self.cipher_text: list[int] = cipher_text_list
+        self.private_key: dict = private_key_dict
+        self.e: list[int] = private_key["e"]
         self.q: int = private_key_dict["q"]
         self.w: int = private_key_dict["w"]
         self.decrypted_text: str = ""
