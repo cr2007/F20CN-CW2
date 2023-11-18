@@ -7,23 +7,23 @@ import math
 
 class PublicKey:
     def __init__(self, private_key_dict: dict):
+        """
+        Initializes the PublicKey object with the private key dictionary.
+
+        Parameters:
+        - `private_key_dict` (dict): The private key dictionary containing 'e', 'q', and 'w' keys.
+        """
         self.e: list = private_key_dict["e"]
         self.q: int = private_key_dict["q"]
         self.w: int = private_key_dict["w"]
 
     def calculate_public_key(self) -> list[int]:
         """
-        This function calculates the public key based on a given random sequence of integers, a
-        random prime number, and a random integer. The public key is calculated as `(w * i) mod q`
-        for each integer `i` in the random sequence.
-
-        ### Parameters:
-        - `e_list` (list): The random sequence of integers.
-        - `q_int` (int): The random prime number.
-        - `w_int` (int): The random integer.
+        Calculates the public key based on the provided private key.
 
         ### Returns:
-        - list: The public key, calculated as described above.
+        - list: The public key calculated as `(w * i) mod q` for each integer `i` in the random
+        sequence.
 
         ### Raises:
         - ValueError: If the random sequence (`e`) is empty or if `q` or `w` are not greater than 0.
@@ -45,28 +45,39 @@ class PublicKey:
 
 class PrivateKey:
     def __init__(self):
+        """
+        Initializes the PrivateKey object.
+        """
         self.e: list[int] = []
         self.q: int = 0
         self.w: int = 0
         self.private_key: dict = {}
 
     def calculate_private_key(self) -> dict:
+        """
+        Calculates the private key, which includes a random sequence, a random prime number, and a
+        random integer.
+
+        Returns:
+        - dict: The private key dictionary containing 'e', 'q', and 'w' keys.
+        """
 
         # Create a random sequence of integers
         self.e = self.create_random_sequence()
 
-        # Choose a random prime number
+        # Choose a random prime number that is greater than twice the last number in the sequence
         self.q = (2 * self.e[-1]) + random.randint(1,1000)
-        while not self.is_prime(self.q): # check if q is prime
-            # if not, choose another random prime number
+        # If the chosen number is not prime, choose another one
+        while not self.is_prime(self.q):
             self.q = (2 * self.e[-1]) + random.randint(1,1000)
 
-        self.w = random.randint(1, self.q+250) # choose a random integer w between 1 and q-1
+        # Choose a random integer w that is less than q
+        self.w = random.randint(1, self.q+250)
+        # If w and q are not coprime, choose another w
         while math.gcd(self.w,self.q) != 1:
-            # if w and q are not coprime, choose another random integer w
             self.w = random.randint(1, self.q-1)
 
-        # Store the private key in a dictionary
+        # Store the private key components in a dictionary
         self.private_key = { "e": self.e, "q": self.q, "w": self.w }
 
         # Return the private key
@@ -74,19 +85,13 @@ class PrivateKey:
 
     def create_random_sequence(self, sequence_length: int = 8) -> list[int]:
         """
-        Creates a random sequence of integers. The first integer is a random number between 1 and
-        100.
-        Each subsequent integer in the sequence is the sum of all previous integers plus a new
-        random integer between 1 and 100.
+        Creates a random sequence of integers.
 
         ### Parameters:
-        - `sequence_length` (int): The length of the sequence to be generated. Default is 8.\n
-        If the `sequence_length` is less than or equal to 0, a ValueError is raised.
+        - `sequence_length` (int): The length of the sequence to be generated. Default is 8.
 
         ### Returns:
-        - list: The generated sequence of integers. The length of the list is equal to
-        `sequence_length`.
-        Each element in the list is an integer.
+        - list: The generated sequence of integers.
 
         ### Raises:
         - ValueError: If `sequence_length` is less than or equal to 0.
@@ -112,16 +117,7 @@ class PrivateKey:
     # Source: https://www.geeksforgeeks.org/python-program-to-check-whether-a-number-is-prime-or-not
     def is_prime(self, number: int) -> bool:
         """
-        Checks if a number is prime or not. A prime number is a natural number greater than 1 that
-        has no positive divisors other than 1 and itself.
-
-        The function first checks if the number is less than or equal to 1, and if so, raises a
-        ValueError. Then it checks if the number is divisible by 2, and if so, returns False.
-
-        Finally, it checks divisibility for all odd numbers up to the square root of the input
-        number.
-        If the number is divisible by any of these, it returns False. If no divisors are found, it
-        returns True.
+        Checks if a number is prime or not.
 
         ### Parameters:
         - `number` (int): The number to be checked. Must be greater than 1.
@@ -150,6 +146,14 @@ class PrivateKey:
 
 class Encryption:
     def __init__(self, public_key_list: list[int], plain_text_list: list[str]) -> None:
+        """
+        Initializes the Encryption object.
+
+        ### Parameters:
+        - `public_key_list` (list): The public key used for encryption. Each key should be an integer.
+        - `plain_text_list` (list): The plain text values to be encrypted. Each value should be a string
+        of binary digits.
+        """
         self.public_key: list[int] = public_key_list
         self.plain_text: list[str] = plain_text_list
         self.cipher_text: list[int] = []
@@ -158,20 +162,8 @@ class Encryption:
         """
         Encrypts a list of binary plain text values using a public key.
 
-        Each binary value in the plain text list is encrypted by multiplying each bit by the
-        corresponding value in the public key and summing the results.
-
-        The function raises a ValueError if the plain text list or the public key list is empty.
-
-        ### Parameters:
-        - `plain_text_list` (list): The plain text values to be encrypted. Each value should be a
-        string of binary digits.
-        - `public_key_list` (list): The public key used for encryption. Each key should be an
-        integer.
-
         ### Returns:
-        - list: The encrypted text, represented as a list of integers. Each integer is the encrypted
-        form of the corresponding binary value in the plain text list.
+        - list: The encrypted text, represented as a list of integers.
 
         ### Raises:
         - ValueError: If the plain text list or the public key list is empty.
@@ -203,6 +195,13 @@ class Encryption:
 
 class Decryption:
     def __init__(self, cipher_text_list: list[int], private_key_dict: dict):
+        """
+        Initializes the Decryption object.
+
+        ### Parameters:
+        - `cipher_text_list` (list): The ciphertext to be decrypted. Each value should be an integer.
+        - `private_key_dict` (dict): The private key dictionary containing 'e', 'q', and 'w' keys
+        """
         self.cipher_text: list[int] = cipher_text_list
         self.private_key: dict = private_key_dict
         self.e: list[int] = private_key["e"]
@@ -214,26 +213,12 @@ class Decryption:
         """
         Decrypts a given ciphertext using a private key dictionary.
 
-        The private key dictionary should contain 'e', 'q', and 'w' keys. The function first checks if
-        the ciphertext and private key are valid. Then it calculates the multiplicative inverse of 'w'
-        modulo 'q'.
-
-        It then loops through each value in the ciphertext, calculates `c'` (the product of `c` and
-        `w_inv` modulo q), and generates the corresponding binary string.
-
-        Finally, it converts the binary string to text and returns it.
-
-        ### Parameters:
-        - `cipher_text_list` (list): The ciphertext to be decrypted. Each value should be an integer.
-        - `private_key_dict` (dict): The private key dictionary containing 'e', 'q', and 'w' keys. `e`
-        should be a list of integers, `q` and `w` should be integers.
-
         ### Returns:
         - str: The decrypted plaintext.
 
         ### Raises:
-        - ValueError: If the ciphertext is empty or if the private key dictionary does not contain the
-        keys 'e', 'q', and 'w'.
+        - ValueError: If the ciphertext is empty or if the private key dictionary does not contain
+        the keys 'e', 'q', and 'w'.
         """
 
         # Check if the ciphertext list is empty
@@ -311,28 +296,34 @@ if __name__ == "__main__":
         # Split it into a list of 8-bit chunks
         plain_text: list = [ input_binary[i:i+8] for i in range(0,len(input_binary),8) ]
 
+        # Create a PrivateKey object
         priv_key = PrivateKey()
         # Dictionary to store private key: (e,q,w)
         private_key: dict = priv_key.calculate_private_key()
 
+        # Create a PublicKey object with the private key
         pub_key = PublicKey(private_key)
         # Calculate the public key (h)
         public_key: list = pub_key.calculate_public_key()
 
+        # Create an Encryption object with the public key and plain text
         encrypt = Encryption(public_key, plain_text)
-        # Encrypt the plain text
+        # Encrypt the plain text and store the cipher text in a list
         cipher_text: list = encrypt.encryption()
 
+        # Print the cipher text
         print(f"Cipher Text: {sum(cipher_text)}")
 
+        # Create a Decryption object with the cipher text and private key
         decrypt = Decryption(cipher_text, private_key)
-        # Decrypt the cipher text
+        # Decrypt the cipher text and store the decrypted text in a string
         decrypted_text: str = decrypt.decryption()
 
+        # Print the decrypted text
         print(f"Decrypted Text: {decrypted_text}")
     except ValueError as ve:
-        print(f"ValueError occurred: {ve}")
+        print(f"ValueError occurred: {ve}") # Print the error message if a ValueError occurs
     except TypeError as te:
-        print(f"TypeError occurred: {te}")
+        print(f"TypeError occurred: {te}") # Print the error message if a ValueError occurs
     finally:
-        print("Exiting...")
+        print("Exiting...") # Print a message when the program is exiting
