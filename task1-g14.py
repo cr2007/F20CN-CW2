@@ -37,11 +37,8 @@ class PublicKey:
         if self.q <= 0 or self.w <= 0:
             raise ValueError("q and w must be greater than 0.")
 
-        # Calculate the public key
-        h: list = [ (self.w * i) % self.q for i in self.e ]
-
-        # Return the public key
-        return h
+        # Calculates and returns the public key
+        return [ (self.w * i) % self.q for i in self.e ]
 
 class PrivateKey:
     def __init__(self):
