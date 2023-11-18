@@ -201,7 +201,7 @@ class Decryption:
         """
         self.cipher_text: list[int] = cipher_text_list
         self.private_key: dict = private_key_dict
-        self.e: list[int] = private_key["e"]
+        self.e: list[int] = private_key_dict["e"]
         self.q: int = private_key_dict["q"]
         self.w: int = private_key_dict["w"]
         self.decrypted_text: str = ""
