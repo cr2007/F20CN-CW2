@@ -32,13 +32,24 @@ import random
 import math
 
 class PublicKey:
-    def __init__(self, private_key_dict: dict):
-        """
-        Initializes the PublicKey object with the private key dictionary.
+    """
+    A class used to represent a Public Key in a cryptographic system.
 
-        Parameters:
-        - `private_key_dict` (dict): The private key dictionary containing 'e', 'q', and 'w' keys.
-        """
+    Attributes
+    ----------
+    `e` : list
+        a list of random sequence integers
+    `q` : int
+        a large prime number
+    `w` : int
+        a random integer that is relatively prime to q
+
+    Methods
+    -------
+    `calculate_public_key()`:
+        Calculates the public key based on the provided private key.
+    """
+    def __init__(self, private_key_dict: dict):
         self.e: list = private_key_dict["e"]
         self.q: int  = private_key_dict["q"]
         self.w: int  = private_key_dict["w"]
@@ -67,10 +78,31 @@ class PublicKey:
         return [ (self.w * i) % self.q for i in self.e ]
 
 class PrivateKey:
+    """
+    A class used to represent a Private Key in a cryptographic system.
+
+    Attributes
+    ----------
+    `e` : list
+        a list of random sequence integers
+    `q` : int
+        a large prime number
+    `w` : int
+        a random integer that is relatively prime to q
+    `private_key` : dict
+        a dictionary containing the private key components
+
+    Methods
+    -------
+    `calculate_private_key()`:
+        Calculates the private key, which includes a random sequence, a random prime number, and a
+        random integer.
+    `create_random_sequence(sequence_length: int = 8)`:
+        Creates a random sequence of integers.
+    `is_prime(number: int)`:
+        Checks if a number is prime or not.
+    """
     def __init__(self):
-        """
-        Initializes the PrivateKey object.
-        """
         self.e: list[int] = []
         self.q: int = 0
         self.w: int = 0
@@ -168,15 +200,27 @@ class PrivateKey:
         return True
 
 class Encryption:
-    def __init__(self, public_key_list: list[int], plain_text_list: list[str]) -> None:
-        """
-        Initializes the Encryption object.
+    """
+    A class used to represent the Encryption process in a cryptographic system.
 
-        ### Parameters:
-        - `public_key_list` (list): The public key used for encryption. Each key should be an integer.
-        - `plain_text_list` (list): The plain text values to be encrypted. Each value should be a string
-        of binary digits.
-        """
+    ...
+
+    Attributes
+    ----------
+    `public_key` : list[int]
+        The public key used for encryption. Each key should be an integer.
+    `plain_text` : list[str]
+        The plain text values to be encrypted. Each value should be a string of binary digits.
+    `cipher_text` : list[int]
+        The encrypted text, represented as a list of integers.
+
+    Methods
+    -------
+    `encryption()`:
+        Encrypts a list of binary plain text values using a public key and returns the encrypted
+        text.
+    """
+    def __init__(self, public_key_list: list[int], plain_text_list: list[str]) -> None:
         self.public_key: list[int] = public_key_list
         self.plain_text: list[str] = plain_text_list
         self.cipher_text: list[int] = []
@@ -217,14 +261,32 @@ class Encryption:
         return encrypted_text
 
 class Decryption:
-    def __init__(self, cipher_text_list: list[int], private_key_dict: dict):
-        """
-        Initializes the Decryption object.
+    """
+    A class used to represent the Decryption process in a cryptographic system.
 
-        ### Parameters:
-        - `cipher_text_list` (list): The ciphertext to be decrypted. Each value should be an integer.
-        - `private_key_dict` (dict): The private key dictionary containing 'e', 'q', and 'w' keys
-        """
+    ...
+
+    Attributes
+    ----------
+    `cipher_text` : list[int]
+        The ciphertext to be decrypted. Each value should be an integer.
+    `private_key` : dict
+        The private key dictionary containing 'e', 'q', and 'w' keys.
+    `e` : list[int]
+        The random sequence integers from the private key.
+    `q` : int
+        The large prime number from the private key.
+    `w` : int
+        The random integer that is relatively prime to q from the private key.
+    `decrypted_text` : str
+        The decrypted text, represented as a string.
+
+    Methods
+    -------
+    `decryption()`:
+        Decrypts a given ciphertext using a private key dictionary and returns the decrypted text.
+    """
+    def __init__(self, cipher_text_list: list[int], private_key_dict: dict):
         self.cipher_text: list[int] = cipher_text_list
         self.private_key: dict = private_key_dict
         self.e: list[int] = private_key_dict["e"]
