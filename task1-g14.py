@@ -1,5 +1,28 @@
 #!/usr/bin/env python3
 
+"""
+F20CN CW2 Task 1 - Alternative Method of Public-Key Encryption
+
+This module implements an alternative method of public-key encryption. It includes classes for generating
+private and public keys, encryption, and decryption.
+
+Classes:
+    - PublicKey: Represents the public key and provides methods to calculate it based on a given private key.
+    - PrivateKey: Represents the private key and provides methods to calculate it with a random sequence,
+                  a random prime number, and a random integer.
+    - Encryption: Handles the encryption process using a public key.
+    - Decryption: Manages the decryption process using a private key.
+
+Raises:
+    - ValueError: If there are issues with the provided private key or during the encryption/decryption process.
+
+Returns:
+    The module does not have a direct return. It includes classes that facilitate public-key encryption.
+
+Author:
+    - Chandrashekhar Ramaprasad
+    - Oluwadolabomi Faith Muraino
+"""
 
 # Importing required libraries
 import random
