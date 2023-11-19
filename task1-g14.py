@@ -14,8 +14,8 @@ class PublicKey:
         - `private_key_dict` (dict): The private key dictionary containing 'e', 'q', and 'w' keys.
         """
         self.e: list = private_key_dict["e"]
-        self.q: int = private_key_dict["q"]
-        self.w: int = private_key_dict["w"]
+        self.q: int  = private_key_dict["q"]
+        self.w: int  = private_key_dict["w"]
 
     def calculate_public_key(self) -> list[int]:
         """
