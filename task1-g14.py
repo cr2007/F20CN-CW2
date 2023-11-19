@@ -63,15 +63,15 @@ class PrivateKey:
         self.e = self.create_random_sequence()
 
         # Choose a random prime number that is greater than twice the last number in the sequence
-        self.q = (2 * self.e[-1]) + random.randint(1,1000)
+        self.q = (2 * self.e[-1]) + random.randint(1, 1000)
         # If the chosen number is not prime, choose another one
         while not self.is_prime(self.q):
-            self.q = (2 * self.e[-1]) + random.randint(1,1000)
+            self.q = (2 * self.e[-1]) + random.randint(1, 1000)
 
         # Choose a random integer w that is less than q
         self.w = random.randint(1, self.q+250)
         # If w and q are not coprime, choose another w
-        while math.gcd(self.w,self.q) != 1:
+        while math.gcd(self.w, self.q) != 1:
             self.w = random.randint(1, self.q-1)
 
         # Store the private key components in a dictionary
@@ -103,7 +103,7 @@ class PrivateKey:
         # Generate the rest of the sequence
         while len(random_sequence) < sequence_length:
             # The next element is the sum of all previous elements plus a new random integer
-            next_element:int = sum(random_sequence) + random.randint(1,100)
+            next_element:int = sum(random_sequence) + random.randint(1, 100)
 
             # Add the next element to the sequence
             random_sequence.append(next_element)
