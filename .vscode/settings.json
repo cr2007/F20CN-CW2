@@ -16,5 +16,6 @@
 	"diffEditor.ignoreTrimWhitespace": false,
 	"diffEditor.hideUnchangedRegions.enabled": true,
 	"audioCues.terminalCommandFailed": "on",
-	"audioCues.format": "userGesture"
+	"audioCues.format": "userGesture",
+	"python.analysis.typeCheckingMode": "basic",
 }
