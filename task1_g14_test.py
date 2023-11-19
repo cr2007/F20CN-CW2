@@ -86,6 +86,30 @@ class TestEncryptionDecryption:
         public_key = pub_key.calculate_public_key()
 
         # 'Group 14' in binary
+        plain_text = ['01010100', '01101000', '01100101', '00100000', '01100010', '01110010',
+                      '01101111', '01110111', '01101110', '00100000', '01100110', '01101111',
+                      '01111000', '00100000', '01101010', '01110101', '01101101', '01110000',
+                      '01110011', '00100000', '01101111', '01110110', '01100101', '01110010',
+                      '00100000', '01110100', '01101000', '01100101', '00100000', '01101100',
+                      '01100001', '01111010', '01111001', '00100000', '01100100', '01101111',
+                      '01100111', '00101110']
+
+        encrypt = Encryption(public_key, plain_text)
+        cipher_text = encrypt.encryption()
+
+        decrypt = Decryption(cipher_text, private_key)
+        decrypted_text = decrypt.decryption()
+
+        assert decrypted_text == 'The brown fox jumps over the lazy dog.'
+
+    def test_encryption_decryption3(self):
+        priv_key = PrivateKey()
+        private_key = priv_key.calculate_private_key()
+
+        pub_key = PublicKey(private_key)
+        public_key = pub_key.calculate_public_key()
+
+        # 'Group 14' in binary
         plain_text = ['01011001', '01101111', '01110101', '00100000', '01100011', '01100001',
                       '01101110', '01101110', '01101111', '01110100', '00100000', '01110111',
                       '01101111', '01110010', '01110010', '01111001', '00100000', '01100001',
