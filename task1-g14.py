@@ -246,8 +246,8 @@ class Decryption:
             for e_n in reversed(self.e):
                 # If c' is greater than or equal to the value in the random sequence
                 if c_prime >= e_n:
-                    bits = '1' + bits # append '1' to the bits
-                    c_prime -= e_n    # subtract the value from c'
+                    bits = '1' + bits  # append '1' to the bits
+                    c_prime -= e_n     # subtract the value from c'
                 else:
                     bits = '0' + bits # append '0' to the bits
 
