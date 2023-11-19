@@ -33,6 +33,30 @@ class TestPrimeNumber:
         value = 2848637806241
         assert self.priv_key.is_prime(value)
 
+class TestCreateRandomSequence:
+    __priv_key = PrivateKey()
+
+    def test_create_random_sequence1(self):
+        sequence = self.__priv_key.create_random_sequence(5)
+        assert len(sequence) == 5
+
+        for i in range(1, len(sequence)):
+            assert sequence[i] > sum(sequence[:i])
+
+    def test_create_random_sequence2(self):
+        sequence = self.__priv_key.create_random_sequence(15)
+        assert len(sequence) == 15
+
+        for i in range(1, len(sequence)):
+            assert sequence[i] > sum(sequence[:i])
+
+    def test_create_random_sequence3(self):
+        sequence = self.__priv_key.create_random_sequence()
+        assert len(sequence) == 8
+
+        for i in range(1, len(sequence)):
+            assert sequence[i] > sum(sequence[:i])
+
 class TestEncryptionDecryption:
 
     def test_encryption_decryption1(self):
