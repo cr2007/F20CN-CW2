@@ -126,11 +126,11 @@ class PrivateKey:
         while not self.is_prime(self.q):
             self.q = (2 * self.e[-1]) + random.randint(1, 1000)
 
-        # Choose a random integer w that is less than q
+        # Choose a random integer w
         self.w = random.randint(1, self.q+250)
         # If w and q are not coprime, choose another w
         while math.gcd(self.w, self.q) != 1:
-            self.w = random.randint(1, self.q-1)
+            self.w = random.randint(1, self.q+250)
 
         # Store the private key components in a dictionary
         self.private_key = { "e": self.e, "q": self.q, "w": self.w }
