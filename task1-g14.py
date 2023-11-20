@@ -241,9 +241,6 @@ class Encryption:
         elif not self.public_key:
             raise ValueError("Public Key List cannot be empty.")
 
-        # Initialize an empty list to hold the encrypted text
-        encrypted_text: list[int] = []
-
         # Loop through every value in the plain text
         for value in self.plain_text:
             # Initialize a variable to hold the sum of the cipher text
@@ -255,10 +252,10 @@ class Encryption:
                 cipher_text_sum += (int(bit) * self.public_key[i]) if bit == '1' else 0
 
             # Append the sum of the cipher text to the encrypted text list
-            encrypted_text.append(cipher_text_sum)
+            self.cipher_text.append(cipher_text_sum)
 
         # Return the encrypted text
-        return encrypted_text
+        return self.cipher_text
 
 class Decryption:
     """
