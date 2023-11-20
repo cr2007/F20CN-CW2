@@ -347,62 +347,70 @@ class Decryption:
         return self.decrypted_text
 
 
+def main():
+    """
+    This function prompts the user to enter a line of plain text, converts the input text to binary,
+    splits it into a list of 8-bit chunks, creates a private key and a public key, encrypts the
+    plain text using the public key, and then decrypts the cipher text using the private key. The
+    function prints the cipher text and the decrypted text.
+    """
+    # Initialize an empty string to store the user's input
+    input_text: str = ""
+
+    # Start an infinite loop to continuously get input from the user
+    while True:
+        # Prompt the user to enter a line of plain text
+        # The user can press Enter for a new line, or just press Enter to finish
+        line = input("Enter a line of plain text "
+                        "(press Enter for a new line, or just press Enter to finish): ")
+
+        # If the user just presses Enter (i.e., the input line is empty), break the loop
+        if line == "":
+            break
+
+        # Add the input line to the input_text string, followed by a space
+        input_text += line + " "
+
+    # Remove trailing whitespace and '\n' characters
+    input_text = input_text.rstrip()
+
+    # Convert the input text to binary
+    input_binary: str = ''.join(format(ord(i), '08b') for i in input_text)
+
+    # Split it into a list of 8-bit chunks
+    plain_text: list = [ input_binary[i:i+8] for i in range(0,len(input_binary),8) ]
+
+    # Create a PrivateKey object
+    priv_key = PrivateKey()
+    # Dictionary to store private key: (e,q,w)
+    private_key: dict = priv_key.calculate_private_key()
+
+    # Create a PublicKey object with the private key
+    pub_key = PublicKey(private_key)
+    # Calculate the public key (h)
+    public_key: list = pub_key.calculate_public_key()
+
+    # Create an Encryption object with the public key and plain text
+    encrypt = Encryption(public_key, plain_text)
+    # Encrypt the plain text and store the cipher text in a list
+    cipher_text: list = encrypt.encryption()
+
+    # Print the cipher text
+    print(f"Cipher Text: {sum(cipher_text)}")
+
+    # Create a Decryption object with the cipher text and private key
+    decrypt = Decryption(cipher_text, private_key)
+    # Decrypt the cipher text and store the decrypted text in a string
+    decrypted_text: str = decrypt.decryption()
+
+    # Print the decrypted text
+    print(f"Decrypted Text: {decrypted_text}")
+
 # Main function
 if __name__ == "__main__":
 
     try:
-
-        # Initialize an empty string to store the user's input
-        input_text: str = ""
-
-        # Start an infinite loop to continuously get input from the user
-        while True:
-            # Prompt the user to enter a line of plain text
-            # The user can press Enter for a new line, or just press Enter to finish
-            line = input("Enter a line of plain text "
-                         "(press Enter for a new line, or just press Enter to finish): ")
-
-            # If the user just presses Enter (i.e., the input line is empty), break the loop
-            if line == "":
-                break
-
-            # Add the input line to the input_text string, followed by a space
-            input_text += line + " "
-
-        # Remove trailing whitespace and '\n' characters
-        input_text = input_text.rstrip()
-
-        # Convert the input text to binary
-        input_binary: str = ''.join(format(ord(i), '08b') for i in input_text)
-
-        # Split it into a list of 8-bit chunks
-        plain_text: list = [ input_binary[i:i+8] for i in range(0,len(input_binary),8) ]
-
-        # Create a PrivateKey object
-        priv_key = PrivateKey()
-        # Dictionary to store private key: (e,q,w)
-        private_key: dict = priv_key.calculate_private_key()
-
-        # Create a PublicKey object with the private key
-        pub_key = PublicKey(private_key)
-        # Calculate the public key (h)
-        public_key: list = pub_key.calculate_public_key()
-
-        # Create an Encryption object with the public key and plain text
-        encrypt = Encryption(public_key, plain_text)
-        # Encrypt the plain text and store the cipher text in a list
-        cipher_text: list = encrypt.encryption()
-
-        # Print the cipher text
-        print(f"Cipher Text: {sum(cipher_text)}")
-
-        # Create a Decryption object with the cipher text and private key
-        decrypt = Decryption(cipher_text, private_key)
-        # Decrypt the cipher text and store the decrypted text in a string
-        decrypted_text: str = decrypt.decryption()
-
-        # Print the decrypted text
-        print(f"Decrypted Text: {decrypted_text}")
+        main()
     except ValueError as ve:
         print(f"ValueError occurred: {ve}") # Print the error message if a ValueError occurs
     except TypeError as te:
