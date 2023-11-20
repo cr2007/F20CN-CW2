@@ -57,6 +57,14 @@ class TestCreateRandomSequence:
         for i in range(1, len(sequence)):
             assert sequence[i] > sum(sequence[:i])
 
+    def test_value_error1(self):
+        with pytest.raises(ValueError):
+            self.__priv_key.create_random_sequence(-1)
+
+    def test_value_error2(self):
+        with pytest.raises(ValueError):
+            self.__priv_key.create_random_sequence(-1)
+
 class TestEncryptionDecryption:
 
     def test_encryption_decryption1(self):
