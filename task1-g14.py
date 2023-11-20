@@ -155,6 +155,10 @@ class PrivateKey:
         if sequence_length <= 0:
             raise ValueError("Sequence length must be greater than 0.")
 
+        # If sequence length is not a multiple of 8, raise a ValueError
+        if sequence_length % 8 != 0:
+            raise ValueError("Sequence length must be a multiple of 8.")
+
         # Initialize the sequence with a random integer between 1 and 100
         random_sequence: list[int] = [ random.randint(1, 100) ]
 
