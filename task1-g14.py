@@ -156,7 +156,7 @@ class PrivateKey:
             raise ValueError("Sequence length must be greater than 0.")
 
         # Initialize the sequence with a random integer between 1 and 100
-        random_sequence: list[int] = [ random.randint(1,100) ]
+        random_sequence: list[int] = [ random.randint(1, 100) ]
 
         # Generate the rest of the sequence
         while len(random_sequence) < sequence_length:
