@@ -17,6 +17,7 @@
 	"diffEditor.hideUnchangedRegions.enabled": true,
 	"audioCues.terminalCommandFailed": "on",
 	"audioCues.format": "userGesture",
+	"audioCues.save": "always",
 	"python.analysis.typeCheckingMode": "basic",
 	"python.testing.pytestArgs": ["."],
 	"python.testing.unittestEnabled": false,
