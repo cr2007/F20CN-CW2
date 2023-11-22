@@ -9,7 +9,7 @@ class FirewallRule:
 
 class Firewall:
     def __init__(self):
-        self.rules = OrderedDict()
+        self.rules = OrderedDict() #
 
     def add_rule(self, rule_id, direction, address):
         # Check if rule_id already exists
@@ -53,8 +53,8 @@ def main():
     while True:
         command_line = input("Enter command: ").split()
          # Split command line input on spaces
-         
-         # Parse command and execute corresponding Firewall method 
+
+         # Parse command and execute corresponding Firewall method
         if command_line[0] == 'add':
             rule_id = int(command_line[1]) if len(command_line) > 1 and command_line[1].isdigit() else 1
             direction = command_line[command_line.index("-in") if "-in" in command_line else command_line.index("-out") if "-out" in command_line else -1].replace("-", "") if "-in" in command_line or "-out" in command_line else "both"
