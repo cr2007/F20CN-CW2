@@ -14,27 +14,21 @@ class Firewall:
     def add_rule(self, rule_id, direction, address):
         # Check if rule_id already exists
         if rule_id in self.rules:
-            # Insert the new rule above the existing one
+            # Shift the rule IDs of existing rules
             new_rules = OrderedDict()
             for key, value in self.rules.items():
-                if key == rule_id:
-                    # If existing rule has 'both' direction, new rule splits the direction
-                    if value.direction == 'both' and direction != 'both':
-                        new_rules[key] = FirewallRule(key, 'in' if direction == 'out' else 'out', value.address)
-                    new_rules[rule_id + 1] = FirewallRule(rule_id + 1, direction, address)
+                if key >= rule_id:
+                    new_rules[key + 1] = value
                 else:
-                    if key > rule_id:
-                        new_rules[key + 1] = value
-                    else:
-                        new_rules[key] = value
+                    new_rules[key] = value
             self.rules = new_rules
-        else:
-            # Add new rule at the specified rule_id
-            self.rules[rule_id] = FirewallRule(rule_id, direction, address)
+
+        # Insert the new rule
+        self.rules[rule_id] = FirewallRule(rule_id, direction, address)
 
     def remove_rule(self, rule_id, direction):
         if rule_id not in self.rules:
-            return "Error: Rule does not exist."
+            return "Error! Rule Does Not Exist."
         else:
             if self.rules[rule_id].direction == 'both' and direction != 'both':
                 self.rules[rule_id].direction = 'in' if direction == 'out' else 'out'
@@ -57,10 +51,10 @@ def main():
     fw = Firewall()
 
     while True:
-        # Split command line input on spaces
         command_line = input("Enter command: ").split()
-
-        # Parse command and execute corresponding Firewall method
+         # Split command line input on spaces
+         
+         # Parse command and execute corresponding Firewall method 
         if command_line[0] == 'add':
             rule_id = int(command_line[1]) if len(command_line) > 1 and command_line[1].isdigit() else 1
             direction = command_line[command_line.index("-in") if "-in" in command_line else command_line.index("-out") if "-out" in command_line else -1].replace("-", "") if "-in" in command_line or "-out" in command_line else "both"
@@ -75,8 +69,11 @@ def main():
                 direction = 'in'
             elif "-out" in command_line:
                 direction = 'out'
-            fw.remove_rule(rule_id, direction)
-            print(f"Rule {rule_id} removed for {direction} traffic.")
+            result = fw.remove_rule(rule_id, direction)
+            if result:
+                print(result)
+            else:
+                print(f"Rule {rule_id} removed for {direction} traffic.")
 
         elif command_line[0] == 'list':
             rule_id = None
@@ -100,3 +97,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
