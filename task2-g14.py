@@ -78,7 +78,7 @@ class Firewall:
         except FileNotFoundError:
             pass  # If the file doesn't exist, start with an empty rules set
         except json.decoder.JSONDecodeError:
-            print("There are no rules to list.\nExiting...")
+            print("There are no rules to list.\nExiting...") # If the file is empty, exit
             sys.exit(0)
 
     def validate_ip_address(self, address):
