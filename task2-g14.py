@@ -128,28 +128,24 @@ def main():
                 print("Error: Invalid arguments for add command.")
                 sys.exit(1)
 
-                
-
-            
-
         elif command == 'list':
-             rule_id = None
-             direction = None
-             address = None
+            rule_id = None
+            direction = None
+            address = None
 
         for arg in sys.argv[2:]:
-                if arg.isdigit():
-                    rule_id = int(arg)
-                elif arg in ['-in', '-out']:
-                    direction = 'in' if arg == '-in' else 'out'
-                elif arg.count('.') == 3:  
-                    address = arg
-                else:
-                    print("Invalid command.")
-                    return
+            if arg.isdigit():
+                rule_id = int(arg)
+            elif arg in ['-in', '-out']:
+                direction = 'in' if arg == '-in' else 'out'
+            elif arg.count('.') == 3:
+                address = arg
+            else:
+                print("Invalid command.")
+                return
 
         for rule in fw.list_rules(rule_id, direction, address):
-                print(f"Rule {rule[0]}: Direction: [{rule[1]}], Address: [{rule[2]}]")
+            print(f"Rule {rule[0]}: Direction: [{rule[1]}], Address: [{rule[2]}]")
 
     else:
         print("Error: Invalid arguments.\nUsage: python task2-g14.py add [rule_id> [-in | -out] <address>\n\nExample: python task2-g14.py add 1 -in 10.0.0.1")
