@@ -419,5 +419,7 @@ if __name__ == "__main__":
         print(f"ValueError occurred: {ve}") # Print the error message if a ValueError occurs
     except TypeError as te:
         print(f"TypeError occurred: {te}") # Print the error message if a ValueError occurs
+    except KeyboardInterrupt:
+        print("\nCtrl+C Pressed.") # Print a message when Ctrl+C is pressed
     finally:
         print("Exiting...") # Print a message when the program is exiting
