@@ -45,7 +45,7 @@ class Firewall:
          #add new rule to list
         self.rules[rule_id] = FirewallRule(rule_id, direction, address)
         self.save_rules() #save the new set of rules
-
+        
     def remove_rule(self, rule_id, direction=None):#remove rule from firewall
         if rule_id not in self.rules:
             return "Error: Rule does not exist."
@@ -61,7 +61,7 @@ class Firewall:
         for key, value in sorted(self.rules.items()):
              #Skip this rule if it doesn't have the rule ID we're looking for.
             if rule_id is not None and key != rule_id:
-                continue
+                continue 
             # Skip this rule if it doesn't go in the direction we're looking for.
             if direction is not None and not (value.direction == direction or value.direction == 'both'):
                 continue
@@ -109,83 +109,110 @@ def main():
     fw = Firewall()
 
     try:
+        # Check if any command-line arguments are provided. 
         if len(sys.argv) > 1:
-            command = sys.argv[1]
-
-            #check if instructions have been given when the prgram starts.
+            command = sys.argv[1]  # Get the command from the first argument.
+           # Check if the command is 'add' to add a new rule.
             if command == "add":
-                if len(sys.argv) == 3:  # add [addr]
-                    address = sys.argv[2]
+                # If only an address is provided, add a rule with default ID and direction.
+                if len(sys.argv) == 3:   # Check for command format 'add [addr]'
+                    address = sys.argv[2] # Get the address from the arguments.
+                # Validate the given IP address.
                     if not fw.validate_ip_address(address):
                         print("Invalid IP address or range.")
-                        sys.exit(1)
+                        sys.exit(1) # Exit if the address is invalid.
+                     # Add the rule with the default ID and direction.    
                     fw.add_rule(1, "both", address)
+                    # Print confirmation of the added rule.
                     print(f"Rule added with default ID and direction: {json.dumps({'rule_id': 1, 'direction': 'both', 'address': address})}")
 
-                elif len(sys.argv) == 4:  # add [rule] [addr]
-                    rule_id = int(sys.argv[2])
-                    address = sys.argv[3]
+                 # If a rule ID and an address are provided, add a rule with the given ID and default direction.
+                elif len(sys.argv) == 4:   # Check for command format 'add [rule] [addr]'
+                    rule_id = int(sys.argv[2]) # Get the rule ID from the arguments.
+                    address = sys.argv[3] # Get the address from the arguments.
+                     # Validate the given IP address.
                     if not fw.validate_ip_address(address):
                         print("Invalid IP address or range.")
-                        sys.exit(1)
+                        sys.exit(1) # Exit if the address is invalid.
+                        # Add the rule with the given ID and default direction.
                     fw.add_rule(rule_id, "both", address)
+                     # Print confirmation of the added rule.
                     print(f"Rule added: {json.dumps({'rule_id': rule_id, 'direction': 'both', 'address': address})}")
 
-                elif len(sys.argv) == 5:  # add [rule] [direction] [addr]
-                    rule_id = int(sys.argv[2])
-                    direction = sys.argv[3]
-                    address = sys.argv[4]
+                 # If a rule ID, direction, and address are provided, add a rule with the given details.
+                elif len(sys.argv) == 5:   # Check for command format 'add [rule] [direction] [addr]'
+                    rule_id = int(sys.argv[2]) # Get the rule ID from the arguments.
+                    direction = sys.argv[3] # Get the direction from the arguments.
+                    address = sys.argv[4] # Get the address from the arguments.
+                    # Validate the given IP address.
                     if not fw.validate_ip_address(address):
                         print("Invalid IP address or range.")
-                        sys.exit(1)
+                        sys.exit(1) # Exit if the address is invalid.
+                      # Add the rule with the given details.    
                     fw.add_rule(rule_id, direction, address)
+                      # Print confirmation of the added rule.
                     print(f"Rule added: {json.dumps({'rule_id': rule_id, 'direction': direction, 'address': address})}")
 
                 else:
+                      # Print an error message if the command format is incorrect.
                     print("Error: Invalid arguments for add command.")
-                    sys.exit(1)
-
+                    sys.exit(1)   # Exit the program.
+            
+            # Check if the command is 'remove' to remove a rule.
             elif command == 'remove':
+                # Check if at least a rule ID is provided.
                 if len(sys.argv) >= 3:
-                    rule_id = int(sys.argv[2])
+                    rule_id = int(sys.argv[2]) # Get the rule ID from the arguments.
+                    # Get the direction if provided, otherwise set it to None.
                     direction = sys.argv[3][1:] if len(sys.argv) > 3 and sys.argv[3].startswith('-') else None
+                    # Remove the rule with the given ID and direction.
                     result = fw.remove_rule(rule_id, direction)
+                     # Print the result of the removal operation.
                     if result:
                         print(result)
                     else:
                         print(f"Rule {rule_id} {'direction adjusted' if direction else 'removed'}.")
                 else:
+                    # Print an error message if the command format is incorrect.
                     print("Invalid command or insufficient arguments.")
-                    sys.exit(1)
+                    sys.exit(1) # Exit the program.
 
+           # Check if the command is 'list' to list rules.
             elif command == 'list':
                 rule_id = None
                 direction = None
                 address = None
-
+                
+                 # Iterate through additional arguments to set the filter criteria.
                 for arg in sys.argv[2:]:
-                    if arg.isdigit():
-                        rule_id = int(arg)
-                    elif arg in ['-in', '-out']:
-                        direction = 'in' if arg == '-in' else 'out'
-                    elif arg.count('.') == 3 or '-' in arg:  # Check for an IP address or range
-                        address = arg
+                    if arg.isdigit():  # Check if the argument is a digit (for rule ID).
+                    
+                        rule_id = int(arg) # Set the rule ID for filtering.
+                    elif arg in ['-in', '-out']:  # Check if the argument is '-in' or '-out'.
+                        direction = 'in' if arg == '-in' else 'out' # Set the direction for filtering.
+                    elif arg.count('.') == 3 or '-' in arg:   # Check if the argument is an IP address or range.
+                        address = arg # Set the address for filtering.
                     else:
+                        # Print an error message for invalid arguments.
                         print(f"Invalid argument for list command: {arg}")
-                        sys.exit(1)
-
-                    for rule in fw.list_rules(rule_id, direction, address):
-                        print(f"Rule {rule[0]}: Direction: [{rule[1]}], Address: [{rule[2]}]")
+                        sys.exit(1) # Exit the program.
+                
+                # List the rules based on the given filter criteria.
+                for rule in fw.list_rules(rule_id, direction, address):
+                    print(f"Rule {rule[0]}: Direction: [{rule[1]}], Address: [{rule[2]}]")
 
             else:
-                print("Error: Invalid command.\nUsage:\npython task2-g14.py add [rule] [-in|-out] <address>\npython task2-g14.py remove <rule> [-in|-out]\npython task2-g14.py list [rule] [-in|-out] <address>")
-                sys.exit(1)
+                # Print an error message for invalid commands.
+                print("Error: Invalid command. Usage: python script.py [command] [arguments]")
+                sys.exit(1) # Exit the program.
+
 
         else:
-            print("Error: Invalid arguments.\nUsage:\npython task2-g14.py add [rule] [-in|-out] <address>\npython task2-g14.py remove <rule> [-in|-out]\npython task2-g14.py list [rule] [-in|-out] <address>\n\nExample: python task2-g14.py add 1 -in 10.0.0.1")
-        sys.exit(1)
+            # Print an error message if no arguments are provided.
+            print("Error: Invalid arguments.\nUsage: python task2-g14.py add [rule_id> [-in | -out] <address>\n\nExample: python task2-g14.py add 1 -in 10.0.0.1")
+        sys.exit(1) # Exit the program.
     except IndexError:
-        sys.exit(1)
+        sys.exit(1) # Exit the program if an IndexError occurs.
 
 if __name__ == "__main__":
-    main()
+    main()     
