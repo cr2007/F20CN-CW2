@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# pylint: disable=too-few-public-methods
 
 """
 F20CN CW2 Task 1 - Alternative Method of Public-Key Encryption
@@ -24,7 +25,6 @@ Returns:
 
 Author:
     - Chandrashekhar Ramaprasad
-    - Oluwadolabomi Faith Muraino
 """
 
 # Importing required libraries
