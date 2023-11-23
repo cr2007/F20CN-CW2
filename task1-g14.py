@@ -242,7 +242,7 @@ class Encryption:
 
         if not self.plain_text:
             raise ValueError("Plain Text cannot be empty.")
-        elif not self.public_key:
+        if not self.public_key:
             raise ValueError("Public Key List cannot be empty.")
 
         # Loop through every value in the plain text
