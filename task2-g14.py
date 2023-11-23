@@ -177,12 +177,12 @@ def main():
                     for rule in fw.list_rules(rule_id, direction, address):
                         print(f"Rule {rule[0]}: Direction: [{rule[1]}], Address: [{rule[2]}]")
 
-                else:
-                    print("Error: Invalid command. Usage: python script.py [command] [arguments]")
-                    sys.exit(1)
+            else:
+                print("Error: Invalid command.\nUsage:\npython task2-g14.py add [rule] [-in|-out] <address>\npython task2-g14.py remove <rule> [-in|-out]\npython task2-g14.py list [rule] [-in|-out] <address>")
+                sys.exit(1)
 
         else:
-            print("Error: Invalid arguments.\nUsage: python task2-g14.py add [rule_id> [-in | -out] <address>\n\nExample: python task2-g14.py add 1 -in 10.0.0.1")
+            print("Error: Invalid arguments.\nUsage:\npython task2-g14.py add [rule] [-in|-out] <address>\npython task2-g14.py remove <rule> [-in|-out]\npython task2-g14.py list [rule] [-in|-out] <address>\n\nExample: python task2-g14.py add 1 -in 10.0.0.1")
         sys.exit(1)
     except IndexError:
         sys.exit(1)
