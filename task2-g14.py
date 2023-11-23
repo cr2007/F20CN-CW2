@@ -29,7 +29,7 @@ class Firewall:
 
     def add_rule(self, rule_id, direction: None | str, address):
         # Validate IP address or range
-    
+
         # Update existing rules if needed
         if rule_id in self.rules:
             new_rules = OrderedDict()
@@ -68,8 +68,8 @@ class Firewall:
 
     def save_rules(self):
         with open('firewall_rules.json', 'w') as file: #open firewall_rules.json in write mode
-            #convert 
-            json.dump({k: v.__dict__ for k, v in self.rules.items()}, file, indent=4) 
+            #convert
+            json.dump({k: v.__dict__ for k, v in self.rules.items()}, file, indent=4)
 
     def load_rules(self):
         try:
@@ -104,7 +104,6 @@ class Firewall:
 def main():
     fw = Firewall()
 
- 
     if len(sys.argv) > 1:
         command = sys.argv[1]
 
