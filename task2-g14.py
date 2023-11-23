@@ -24,7 +24,7 @@ class Firewall:
         self.rules = OrderedDict()
         self.load_rules()  # Load rules from file on startup
 
-    def add_rule(self, rule_id, direction: None, address):
+    def add_rule(self, rule_id, direction: None | str, address):
         if direction is None:
             direction = 'both'
 
@@ -39,7 +39,7 @@ class Firewall:
         self.rules[rule_id] = FirewallRule(rule_id, direction, address)
         self.save_rules()  # Save rules after adding
 
-    def remove_rule(self, rule_id: int, direction: None):
+    def remove_rule(self, rule_id: int, direction: None | str = None):
         if direction is None:
             direction = 'both'
         if rule_id not in self.rules:
