@@ -45,7 +45,7 @@ class Firewall:
          #add new rule to list
         self.rules[rule_id] = FirewallRule(rule_id, direction, address)
         self.save_rules() #save the new set of rules
-        
+
     def remove_rule(self, rule_id, direction=None):#remove rule from firewall
         if rule_id not in self.rules:
             return "Error: Rule does not exist."
@@ -61,7 +61,7 @@ class Firewall:
         for key, value in sorted(self.rules.items()):
              #Skip this rule if it doesn't have the rule ID we're looking for.
             if rule_id is not None and key != rule_id:
-                continue 
+                continue
             # Skip this rule if it doesn't go in the direction we're looking for.
             if direction is not None and not (value.direction == direction or value.direction == 'both'):
                 continue
@@ -108,10 +108,10 @@ class Firewall:
 def main():
     fw = Firewall()
 
-    try: 
+    try:
         if len(sys.argv) > 1:
             command = sys.argv[1]
-        
+
             #check if instructions have been given when the prgram starts.
             if command == "add":
                 if len(sys.argv) == 3:  # add [addr]
@@ -188,4 +188,4 @@ def main():
         sys.exit(1)
 
 if __name__ == "__main__":
-    main()     
+    main()
