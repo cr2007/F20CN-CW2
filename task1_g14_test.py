@@ -1,3 +1,5 @@
+# pylint: disable=missing-module-docstring, missing-function-docstring, missing-class-docstring
+# pylint: disable=line-too-long
 import pytest
 
 from task1_g14 import PrivateKey, PublicKey, Encryption, Decryption
