@@ -8,9 +8,7 @@
 			"installZsh": "true",
 			"username": "group-14"
 		},
-		"ghcr.io/devcontainers/features/git-lfs:1": {
-			"version": "3.4"
-		},
+		"ghcr.io/devcontainers/features/git-lfs:1": {},
 		"ghcr.io/devcontainers/features/github-cli:1": {}
 	},
 	"customizations": {
