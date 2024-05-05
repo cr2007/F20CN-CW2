@@ -15,11 +15,17 @@
 	},
 	"diffEditor.ignoreTrimWhitespace": false,
 	"diffEditor.hideUnchangedRegions.enabled": true,
-	"audioCues.terminalCommandFailed": "on",
-	"audioCues.format": "userGesture",
-	"audioCues.save": "always",
 	"python.analysis.typeCheckingMode": "basic",
 	"python.testing.pytestArgs": ["."],
 	"python.testing.unittestEnabled": false,
 	"python.testing.pytestEnabled": true,
+	"accessibility.signals.terminalCommandFailed": {
+		"sound": "on"
+	},
+	"accessibility.signals.save": {
+		"sound": "always"
+	},
+	"accessibility.signals.format": {
+		"sound": "userGesture"
+	},
 }
