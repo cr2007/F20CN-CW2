@@ -29,7 +29,7 @@ Author:
 """
 
 # Importing required libraries
-import random
+import secrets
 import math
 
 class PublicKey:
@@ -108,6 +108,7 @@ class PrivateKey:
         self.q: int = 0
         self.w: int = 0
         self.private_key: dict = {}
+        self.secret = secrets.SystemRandom()
 
     def calculate_private_key(self) -> dict:
         """
@@ -122,16 +123,16 @@ class PrivateKey:
         self.e = self.create_random_sequence()
 
         # Choose a random prime number that is greater than twice the last number in the sequence
-        self.q = (2 * self.e[-1]) + random.randint(1, 1000)
+        self.q = (2 * self.e[-1]) + self.secret.randint(1, 1000)
         # If the chosen number is not prime, choose another one
         while not self.is_prime(self.q):
-            self.q = (2 * self.e[-1]) + random.randint(1, 1000)
+            self.q = (2 * self.e[-1]) + self.secret.randint(1, 1000)
 
         # Choose a random integer w
-        self.w = random.randint(1, self.q+250)
+        self.w = self.secret.randint(1, self.q+250)
         # If w and q are not coprime, choose another w
         while math.gcd(self.w, self.q) != 1:
-            self.w = random.randint(1, self.q+250)
+            self.w = self.secret.randint(1, self.q+250)
 
         # Store the private key components in a dictionary
         self.private_key = { "e": self.e, "q": self.q, "w": self.w }
@@ -161,12 +162,12 @@ class PrivateKey:
             raise ValueError("Sequence length must be a multiple of 8.")
 
         # Initialize the sequence with a random integer between 1 and 100
-        random_sequence: list[int] = [ random.randint(1, 100) ]
+        random_sequence: list[int] = [ self.secret.randint(1, 100) ]
 
         # Generate the rest of the sequence
         while len(random_sequence) < sequence_length:
             # The next element is the sum of all previous elements plus a new random integer
-            next_element:int = sum(random_sequence) + random.randint(1, 100)
+            next_element:int = sum(random_sequence) + self.secret.randint(1, 100)
 
             # Add the next element to the sequence
             random_sequence.append(next_element)
