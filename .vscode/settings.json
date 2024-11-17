@@ -23,7 +23,7 @@
 		"sound": "on"
 	},
 	"accessibility.signals.save": {
-		"sound": "always"
+		"sound": "userGesture"
 	},
 	"accessibility.signals.format": {
 		"sound": "userGesture"
