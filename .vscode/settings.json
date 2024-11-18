@@ -28,4 +28,5 @@
 	"accessibility.signals.format": {
 		"sound": "userGesture"
 	},
+	"tinymist.formatterMode": "typstfmt",
 }
