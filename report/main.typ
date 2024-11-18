@@ -580,7 +580,7 @@ class FirewallRule:
               elif len(sys.argv) == 4: # Check for command format 'add [rule] [addr]'
                   rule_id = int(sys.argv[2]) # Get the rule ID from the arguments.
                   address = sys.argv[3] # Get the address from the arguments.
-                    # Validate the given IP address.
+                  # Validate the given IP address.
                   if not fw.validate_ip_address(address):
                       print("Invalid IP address or range.")
                       sys.exit(1) # Exit if the address is invalid.
