@@ -288,6 +288,8 @@ def main():
 ```
 )
 
+#line(length: 100%)
+
 #figure(
   caption: "Encryption Class Python Code",
   ```py class Encryption:
@@ -322,6 +324,7 @@ def main():
 ```
 )
 
+#line(length: 100%)
 #pagebreak()
 
 #figure(
@@ -380,6 +383,7 @@ def main():
 ```
 )
 
+#line(length: 100%)
 #pagebreak()
 
 #heading(level: 2, "Task 1: Testing")
@@ -392,18 +396,41 @@ To CSK: You cannot worry about upsetting every person you come across, but you m
 
 #heading(level: 3, "Example 1: Ciphertext")
 
-#read("./Task1-Testing/cipher_text1.txt")
+#read("./Task1-Examples/Example1/cipher_text1.txt")
 
 #heading(level: 3, "Example 1: Key Generation")
 #v(1em)
 
 #figure(caption: "Private and Public Key generated for Example 1 Plaintext", grid(
   gutter: 1em,
-  [*Private Key:* #raw(lang: "json", read("./Task1-Testing/private_key1.txt"))],
-  [*Public Key:* #raw(lang: "json", read("./Task1-Testing/public_key1.txt"))],
+  [*Private Key:* #raw(lang: "json", read("./Task1-Examples/Example1/private_key1.txt"))],
+  [*Public Key:* #raw(lang: "json", read("./Task1-Examples/Example1/public_key1.txt"))],
 ))
 
+\
+#line(length: 100%)
 #pagebreak()
+
+#heading(level: 3, "Example 2: Plaintext")
+
+```
+To Chandrashekhar: Do not be one of the many who mistakenly believe that the ultimate form of power is independence. Power involves a relationship between people; you will always need others as allies, pawns, or even as weak masters who serve as your front. The completely independent man would live in a cabin in the woods--he would have the freedom to come and go as he pleased, but he would have no power. The best you can hope for is that others will grow so dependent on you that you enjoy a kind of reverse independence: Their need for you frees you.
+```
+
+#heading(level: 3, "Example 2: Ciphertext")
+
+#read("./Task1-Examples/Example2/cipher_text2.txt")
+
+#heading(level: 3, "Example 2: Key Generation")
+
+#figure(caption: "Private and Public Key generated for Example 2 Plaintext", grid(
+  gutter: 1em,
+  [*Private Key:* #raw(lang: "json", read("./Task1-Examples/Example2/private_key2.txt"))],
+  [*Public Key:* #raw(lang: "json", read("./Task1-Examples/Example2/public_key2.txt"))],
+))
+
+\
+#line(length: 100%)
 
 #heading(level: 2, "Task 2: Python Code")
 
@@ -437,8 +464,11 @@ class FirewallRule:
     self.rule_id = rule_id     # stores rule in order
     self.direction = direction # 'in', 'out', or 'both'
     self.address = address     # Can be a single IP or range like "0.0.0.0-0.0.0.255"
-```)
-\
+```
+)
+
+#line(length: 100%)
+#pagebreak()
 
 #figure(
   caption: "Firewall Class Python Code",
@@ -521,7 +551,7 @@ class FirewallRule:
   ```
 )
 
-\
+#line(length: 100%)
 
 #figure(
   caption: "Main Function Python Code",
@@ -599,6 +629,7 @@ class FirewallRule:
                   print("Invalid command or insufficient arguments.")
                   sys.exit(1) # Exit the program.
 
+
           # Check if the command is 'list' to list rules.
           elif command == 'list':
               rule_id = None
@@ -665,3 +696,5 @@ if __name__ == "__main__":
     image("./images/Task2/Appendix-Task2-Testing-ErrorHandling_2.png", alt: "Screenshot of Task 2 - Error Handling (2)"),
   ),
 )
+
+#line(length: 100%)
