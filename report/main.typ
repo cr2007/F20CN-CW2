@@ -1,4 +1,7 @@
 #import "lib.typ": template
+#import "@preview/codly:1.2.0": *
+#import "@preview/codly-languages:0.1.1": *
+#show: codly-init.with()
 
 #set document(author: "Chandrashekhar R", title: "F20CN Coursework 2")
 
@@ -207,66 +210,69 @@ def main():
     print(f"Decrypted Text: {decrypted_text}") # Print the decrypted text
 ```)
 
-#pagebreak()
+\ #line()
 
 #figure(
   caption: "Private Key Class Python Code",
   ```py class PrivateKey:
     def __init__(self):
-        self.e: list[int] = []
-        self.q: int = 0
-        self.w: int = 0
-        self.private_key: dict = {}
+      self.e: list[int] = []
+      self.q: int = 0
+      self.w: int = 0
+      self.private_key: dict = {}
 
     def calculate_private_key(self) -> dict:
-        self.e = self.create_random_sequence() # Create a random sequence of integers
-        self.q = (2 * self.e[-1]) + random.randint(1, 1000)
+      self.e = self.create_random_sequence() # Create a random sequence of integers
+      self.q = (2 * self.e[-1]) + random.randint(1, 1000)
 
-        while not self.is_prime(self.q): # If number is not prime, choose another one
-            self.q = (2 * self.e[-1]) + random.randint(1, 1000)
+      while not self.is_prime(self.q): # If number is not prime, choose another one
+          self.q = (2 * self.e[-1]) + random.randint(1, 1000)
 
-        self.w = random.randint(1, self.q+250) # Choose a random integer w
-        while math.gcd(self.w, self.q) != 1: # If w and q are not coprime, recalculate 'w'
-            self.w = random.randint(1, self.q+250)
+      self.w = random.randint(1, self.q+250) # Choose a random integer w
+      while math.gcd(self.w, self.q) != 1: # If w and q are not coprime, recalculate 'w'
+          self.w = random.randint(1, self.q+250)
 
-        # Store the private key components in a dictionary
-        self.private_key = { "e": self.e, "q": self.q, "w": self.w }
-        return self.private_key # Return the private key
+      # Store the private key components in a dictionary
+      self.private_key = { "e": self.e, "q": self.q, "w": self.w }
+      return self.private_key # Return the private key
 
     def create_random_sequence(self, sequence_length: int = 8) -> list[int]:
-        if sequence_length <= 0:
-            raise ValueError("Sequence length must be greater than 0.")
+      if sequence_length <= 0:
+          raise ValueError("Sequence length must be greater than 0.")
 
-        # If sequence length is not a multiple of 8, raise a ValueError
-        if sequence_length % 8 != 0:
-            raise ValueError("Sequence length must be a multiple of 8.")
+      # If sequence length is not a multiple of 8, raise a ValueError
+      if sequence_length % 8 != 0:
+          raise ValueError("Sequence length must be a multiple of 8.")
 
-        random_sequence: list[int] = [ random.randint(1, 100) ] # Initialize random integer sequence
+      random_sequence: list[int] = [ random.randint(1, 100) ] # Initialize random integer sequence
 
-        while len(random_sequence) < sequence_length: # Generate the rest of the sequence
-            next_element:int = sum(random_sequence) + random.randint(1, 100)
+      while len(random_sequence) < sequence_length: # Generate the rest of the sequence
+          next_element:int = sum(random_sequence) + random.randint(1, 100)
 
-            random_sequence.append(next_element) # Add the next element to the sequence
+          random_sequence.append(next_element) # Add the next element to the sequence
 
-        return random_sequence # Return the random sequence
+      return random_sequence # Return the random sequence
 
     # Source: https://www.geeksforgeeks.org/python-program-to-check-whether-a-number-is-prime-or-not
     def is_prime(self, number: int) -> bool:
-        if number <= 1:
-            raise ValueError("Number must be greater than 1.")
-        if number % 2 == 0:
-            return False
+      if number <= 1:
+          raise ValueError("Number must be greater than 1.")
+      if number % 2 == 0:
+          return False
 
-        for i in range(3, int(math.sqrt(number))+1, 2):
-            if number % i == 0:
-                return False
+      for i in range(3, int(math.sqrt(number))+1, 2):
+          if number % i == 0:
+              return False
 
-        return True # If no divisors found, the number is prime
+      return True # If no divisors found, the number is prime
   ```
 )
 
 #pagebreak()
 
+#codly(highlights: (
+  (line: 17, start: 9, end: none, fill: green,),
+)),
 #figure(
   caption: "Public Key Class Python Code",
   ```py class PublicKey:
@@ -325,8 +331,7 @@ def main():
 ```
 )
 
-#line()
-#pagebreak()
+\ #line()
 
 #figure(
   caption: "Decryption Class Python Code",
@@ -385,15 +390,14 @@ def main():
 )
 
 #line()
-#pagebreak()
 
 #heading(level: 2, "Task 1: Testing")
 
 #heading(level: 3, "Example 1: Plaintext")
 
-```
+#no-codly[```
 To CSK: You cannot worry about upsetting every person you come across, but you must be selectively cruel. If your superior is a falling star, there is nothing to fear from outshining him. Do not be merciful--your master had no such scruples in his own cold-blooded climb to the top. Gauge his strength. If he is weak, discreetly hasten his downfall: Outdo, outcharm, outsmart him at key moments. If he is very weak and ready to fall, let nature take its course. Do not risk outshining a feeble superior--it might appear cruel or spiteful. But if your master is firm in his position, yet you know yourself to be the more capable, hide your time and be patient. It is the natural course of things that power eventually fades and weakens. Your master will fall someday, and if you play it right, you will outlive and someday outshine him.
-```
+```]
 
 #heading(level: 3, "Example 1: Ciphertext")
 
@@ -410,13 +414,12 @@ To CSK: You cannot worry about upsetting every person you come across, but you m
 
 \
 #line()
-#pagebreak()
 
 #heading(level: 3, "Example 2: Plaintext")
 
-```
+#no-codly[```
 To Chandrashekhar: Do not be one of the many who mistakenly believe that the ultimate form of power is independence. Power involves a relationship between people; you will always need others as allies, pawns, or even as weak masters who serve as your front. The completely independent man would live in a cabin in the woods--he would have the freedom to come and go as he pleased, but he would have no power. The best you can hope for is that others will grow so dependent on you that you enjoy a kind of reverse independence: Their need for you frees you.
-```
+```]
 
 #heading(level: 3, "Example 2: Ciphertext")
 
@@ -469,7 +472,6 @@ class FirewallRule:
 )
 
 #line()
-#pagebreak()
 
 #figure(
   caption: "Firewall Class Python Code",
@@ -560,112 +562,110 @@ class FirewallRule:
   fw = Firewall()
 
   try:
-      # Check if any command-line arguments are provided.
-      if len(sys.argv) > 1:
-          command = sys.argv[1]  # Get the command from the first argument.
-          # Check if the command is 'add' to add a new rule.
-          if command == "add":
-              # If only an address is provided, add a rule with default ID and direction.
-              if len(sys.argv) == 3:   # Check for command format 'add [addr]'
-                  address = sys.argv[2] # Get the address from the arguments.
-              # Validate the given IP address.
-                  if not fw.validate_ip_address(address):
-                      print("Invalid IP address or range.")
-                      sys.exit(1) # Exit if the address is invalid.
-                    # Add the rule with the default ID and direction.
-                  fw.add_rule(1, "both", address)
+    # Check if any command-line arguments are provided.
+    if len(sys.argv) > 1:
+        command = sys.argv[1]  # Get the command from the first argument.
+        # Check if the command is 'add' to add a new rule.
+        if command == "add":
+            # If only an address is provided, add a rule with default ID and direction.
+            if len(sys.argv) == 3:   # Check for command format 'add [addr]'
+                address = sys.argv[2] # Get the address from the arguments.
+            # Validate the given IP address.
+                if not fw.validate_ip_address(address):
+                    print("Invalid IP address or range.")
+                    sys.exit(1) # Exit if the address is invalid.
+                  # Add the rule with the default ID and direction.
+                fw.add_rule(1, "both", address)
+                # Print confirmation of the added rule.
+                print(f"Rule added with default ID and direction: {json.dumps({'rule_id': 1, 'direction': 'both', 'address': address})}")
+
+            # If a rule ID and an address are provided, add a rule with the given ID and default direction.
+            elif len(sys.argv) == 4: # Check for command format 'add [rule] [addr]'
+                rule_id = int(sys.argv[2]) # Get the rule ID from the arguments.
+                address = sys.argv[3] # Get the address from the arguments.
+                # Validate the given IP address.
+                if not fw.validate_ip_address(address):
+                    print("Invalid IP address or range.")
+                    sys.exit(1) # Exit if the address is invalid.
+                    # Add the rule with the given ID and default direction.
+                fw.add_rule(rule_id, "both", address)
                   # Print confirmation of the added rule.
-                  print(f"Rule added with default ID and direction: {json.dumps({'rule_id': 1, 'direction': 'both', 'address': address})}")
+                print(f"Rule added: {json.dumps({'rule_id': rule_id, 'direction': 'both', 'address': address})}")
 
-              # If a rule ID and an address are provided, add a rule with the given ID and default direction.
-              elif len(sys.argv) == 4: # Check for command format 'add [rule] [addr]'
-                  rule_id = int(sys.argv[2]) # Get the rule ID from the arguments.
-                  address = sys.argv[3] # Get the address from the arguments.
-                  # Validate the given IP address.
-                  if not fw.validate_ip_address(address):
-                      print("Invalid IP address or range.")
-                      sys.exit(1) # Exit if the address is invalid.
-                      # Add the rule with the given ID and default direction.
-                  fw.add_rule(rule_id, "both", address)
-                    # Print confirmation of the added rule.
-                  print(f"Rule added: {json.dumps({'rule_id': rule_id, 'direction': 'both', 'address': address})}")
+              # If a rule ID, direction, and address are provided, add a rule with the given details.
+            elif len(sys.argv) == 5:  # Check for command format 'add [rule] [direction] [addr]'
+                rule_id = int(sys.argv[2]) # Get the rule ID from the arguments.
+                direction = sys.argv[3] # Get the direction from the arguments.
+                address = sys.argv[4] # Get the address from the arguments.
+                # Validate the given IP address.
 
-                # If a rule ID, direction, and address are provided, add a rule with the given details.
-              elif len(sys.argv) == 5:  # Check for command format 'add [rule] [direction] [addr]'
-                  rule_id = int(sys.argv[2]) # Get the rule ID from the arguments.
-                  direction = sys.argv[3] # Get the direction from the arguments.
-                  address = sys.argv[4] # Get the address from the arguments.
-                  # Validate the given IP address.
+                if not fw.validate_ip_address(address):
+                    print("Invalid IP address or range.")
+                    sys.exit(1) # Exit if the address is invalid.
 
-                  if not fw.validate_ip_address(address):
-                      print("Invalid IP address or range.")
-                      sys.exit(1) # Exit if the address is invalid.
+                # Add the rule with the given details.
+                fw.add_rule(rule_id, direction, address)
+                # Print confirmation of the added rule.
+                print(f"Rule added: {json.dumps({'rule_id': rule_id, 'direction': direction, 'address': address})}")
 
-                  # Add the rule with the given details.
-                  fw.add_rule(rule_id, direction, address)
-                  # Print confirmation of the added rule.
-                  print(f"Rule added: {json.dumps({'rule_id': rule_id, 'direction': direction, 'address': address})}")
+            else:
+                # Print an error message if the command format is incorrect.
+                print("Error: Invalid arguments for add command.")
+                sys.exit(1)   # Exit the program.
 
-              else:
-                  # Print an error message if the command format is incorrect.
-                  print("Error: Invalid arguments for add command.")
-                  sys.exit(1)   # Exit the program.
+        # Check if the command is 'remove' to remove a rule.
+        elif command == 'remove':
+            # Check if at least a rule ID is provided.
+            if len(sys.argv) >= 3:
+                rule_id = int(sys.argv[2]) # Get the rule ID from the arguments.
+                # Get the direction if provided, otherwise set it to None.
+                direction = sys.argv[3][1:] if len(sys.argv) > 3 and sys.argv[3].startswith('-') else None
+                # Remove the rule with the given ID and direction.
+                result = fw.remove_rule(rule_id, direction)
+                # Print the result of the removal operation.
+                if result:
+                    print(result)
+                else:
+                    print(f"Rule {rule_id} {'direction adjusted' if direction else 'removed'}.")
+            else:
+                # Print an error message if the command format is incorrect.
+                print("Invalid command or insufficient arguments.")
+                sys.exit(1) # Exit the program.
 
-          # Check if the command is 'remove' to remove a rule.
-          elif command == 'remove':
-              # Check if at least a rule ID is provided.
-              if len(sys.argv) >= 3:
-                  rule_id = int(sys.argv[2]) # Get the rule ID from the arguments.
-                  # Get the direction if provided, otherwise set it to None.
-                  direction = sys.argv[3][1:] if len(sys.argv) > 3 and sys.argv[3].startswith('-') else None
-                  # Remove the rule with the given ID and direction.
-                  result = fw.remove_rule(rule_id, direction)
-                  # Print the result of the removal operation.
-                  if result:
-                      print(result)
-                  else:
-                      print(f"Rule {rule_id} {'direction adjusted' if direction else 'removed'}.")
-              else:
-                  # Print an error message if the command format is incorrect.
-                  print("Invalid command or insufficient arguments.")
-                  sys.exit(1) # Exit the program.
+        # Check if the command is 'list' to list rules.
+        elif command == 'list':
+            rule_id = None
+            direction = None
+            address = None
 
+            # Iterate through additional arguments to set the filter criteria.
+            for arg in sys.argv[2:]:
+                if arg.isdigit():  # Check if the argument is a digit (for rule ID).
+                    rule_id = int(arg) # Set the rule ID for filtering.
+                elif arg in ['-in', '-out']:  # Check if argument is '-in' or '-out'.
+                    direction = 'in' if arg == '-in' else 'out' # Set the direction for filtering.
+                elif arg.count('.') == 3 or '-' in arg: # Check if the argument is an IP address or range.
+                    address = arg # Set the address for filtering.
+                else:
+                    # Print an error message for invalid arguments.
+                    print(f"Invalid argument for list command: {arg}")
+                    sys.exit(1) # Exit the program.
 
-          # Check if the command is 'list' to list rules.
-          elif command == 'list':
-              rule_id = None
-              direction = None
-              address = None
-
-              # Iterate through additional arguments to set the filter criteria.
-              for arg in sys.argv[2:]:
-                  if arg.isdigit():  # Check if the argument is a digit (for rule ID).
-                      rule_id = int(arg) # Set the rule ID for filtering.
-                  elif arg in ['-in', '-out']:  # Check if argument is '-in' or '-out'.
-                      direction = 'in' if arg == '-in' else 'out' # Set the direction for filtering.
-                  elif arg.count('.') == 3 or '-' in arg: # Check if the argument is an IP address or range.
-                      address = arg # Set the address for filtering.
-                  else:
-                      # Print an error message for invalid arguments.
-                      print(f"Invalid argument for list command: {arg}")
-                      sys.exit(1) # Exit the program.
-
-
-              # List the rules based on the given filter criteria.
-              for rule in fw.list_rules(rule_id, direction, address):
-                  print(f"Rule {rule[0]}: Direction: [{rule[1]}], Address: [{rule[2]}]")
-
-          else:
-              # Print an error message for invalid commands.
-              print("Error: Invalid command. Usage: python script.py [command] [arguments]")
-              sys.exit(1) # Exit the program.
+            # List the rules based on the given filter criteria.
+            for rule in fw.list_rules(rule_id, direction, address):
+                print(f"Rule {rule[0]}: Direction: [{rule[1]}], Address: [{rule[2]}]")
 
         else:
-            # Print an error message if no arguments are provided.
-            print("Error: Invalid arguments.\nUsage: python task2-g14.py add [rule_id> [-in | -out] <address>\n\nExample: python task2-g14.py add 1 -in 10.0.0.1")
-        sys.exit(1) # Exit the program.
-    except IndexError:
-        sys.exit(1) # Exit the program if an IndexError occurs.
+            # Print an error message for invalid commands.
+            print("Error: Invalid command. Usage: python script.py [command] [arguments]")
+            sys.exit(1) # Exit the program.
+
+      else:
+          # Print an error message if no arguments are provided.
+          print("Error: Invalid arguments.\nUsage: python task2-g14.py add [rule_id> [-in | -out] <address>\n\nExample: python task2-g14.py add 1 -in 10.0.0.1")
+      sys.exit(1) # Exit the program.
+  except IndexError:
+      sys.exit(1) # Exit the program if an IndexError occurs.
 
 if __name__ == "__main__":
     main()
