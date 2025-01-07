@@ -3,6 +3,7 @@
 #set document(author: "Chandrashekhar R", title: "F20CN Coursework 2")
 
 #show: template.with()
+#set line(length: 100%)
 
 #image("images/HWU-Logo.png", height: 2.7cm)
 
@@ -79,7 +80,7 @@ As displayed, each specific result will vary with each run due to the random gen
 
 \
 
-#line(length: 100%)
+#line()
 #pagebreak()
 
 #heading("Task 2: Firewall Rules Application")
@@ -146,7 +147,7 @@ Address will list the rules matching the given address.
 )))
 
 \
-#line(length: 100%)
+#line()
 #pagebreak()
 
 #heading("Appendix")
@@ -288,7 +289,7 @@ def main():
 ```
 )
 
-#line(length: 100%)
+#line()
 
 #figure(
   caption: "Encryption Class Python Code",
@@ -324,7 +325,7 @@ def main():
 ```
 )
 
-#line(length: 100%)
+#line()
 #pagebreak()
 
 #figure(
@@ -383,7 +384,7 @@ def main():
 ```
 )
 
-#line(length: 100%)
+#line()
 #pagebreak()
 
 #heading(level: 2, "Task 1: Testing")
@@ -408,7 +409,7 @@ To CSK: You cannot worry about upsetting every person you come across, but you m
 ))
 
 \
-#line(length: 100%)
+#line()
 #pagebreak()
 
 #heading(level: 3, "Example 2: Plaintext")
@@ -430,7 +431,7 @@ To Chandrashekhar: Do not be one of the many who mistakenly believe that the ult
 ))
 
 \
-#line(length: 100%)
+#line()
 
 #heading(level: 2, "Task 2: Python Code")
 
@@ -467,7 +468,7 @@ class FirewallRule:
 ```
 )
 
-#line(length: 100%)
+#line()
 #pagebreak()
 
 #figure(
@@ -551,7 +552,7 @@ class FirewallRule:
   ```
 )
 
-#line(length: 100%)
+#line()
 
 #figure(
   caption: "Main Function Python Code",
@@ -697,4 +698,4 @@ if __name__ == "__main__":
   ),
 )
 
-#line(length: 100%)
+#line()
