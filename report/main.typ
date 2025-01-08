@@ -1,9 +1,12 @@
-#import "lib.typ": template
+#import "lib.typ": template, getStudentNames
 #import "@preview/codly:1.2.0": *
 #import "@preview/codly-languages:0.1.1": *
+#import "@preview/oxifmt:0.2.1": strfmt
 #show: codly-init.with()
 
 #set document(author: "Chandrashekhar R", title: "F20CN Coursework 2")
+
+#let data = yaml("metadata.yml")
 
 #show: template.with()
 #set line(length: 100%)
@@ -14,21 +17,21 @@
   size: 28pt,
   font: "Segoe UI Variable",
   weight: "extrabold",
-  "F20CN Coursework 2"
+  strfmt("{} {}", data.courseCode, data.courseworkTitle)
 )
 
 #text(size: 11pt, weight: "bold", [
-  Course: #link("https://curriculum.hw.ac.uk/coursedetails/F20CN?termcode=202324")[
-    #text(rgb("#0563C1"))[Computer Network Security]
+  Course: #link(data.courseCurriculumLink)[
+    #text(rgb("#0563C1"), data.courseName)
   ]
 ])
 
 // #v(0.5em)
-*Group 14*
+*Group #data.groupNumber*
+
 #v(0.5em)
 *Team Members*:\
-*Chandrashekhar Ramaprasad (cr2007)*\
-*Oluwadolabomi Faith Muraino (fm2020)*
+#getStudentNames(data)
 
 \
 

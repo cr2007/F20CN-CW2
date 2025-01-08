@@ -1,19 +1,23 @@
+#import "@preview/oxifmt:0.2.1": strfmt
+
+#let data = yaml("metadata.yml")
+
 #let template(doc) = [
   #set page(
     header: context {
       if counter(page).get().first() > 1 [
-        Computer Network Security
+        #data.courseName
         #h(1fr)
-        cr2007 \ #h(1fr) fm2020
+        #data.studentEmail.join[\ #h(1fr)]
       ]
     },
     footer: context {
       if counter(page).get().first() > 1 [
-        F20CN
+        #data.courseCode
         #h(1fr)
         #context counter(page).display("1")
         #h(1fr)
-        Coursework 2
+        #data.courseworkTitle
       ] else [#context counter(page).display("1")]
     }
   )
@@ -37,3 +41,18 @@
 
   #doc
 ]
+
+#let getStudentNames(data) = {
+  let studentNames = ()
+
+  for index in range(0, data.studentFirstName.len()) {
+    studentNames.push(strong(strfmt(
+      "{} {} ({})",
+      data.studentFirstName.at(index),
+      data.studentLastName.at(index),
+      data.studentEmail.at(index)
+    )))
+  }
+
+  return studentNames.join("\n")
+}
