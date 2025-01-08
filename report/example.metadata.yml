@@ -1,0 +1,17 @@
+studentFirstName:
+  - Jane
+  - John
+
+studentLastName:
+  - Doe
+  - Doe
+
+studentEmail:
+  - jd1234
+  - jd2345
+
+courseName: Computer Network Security
+courseCode: F20CN
+courseCurriculumLink: https://curriculum.hw.ac.uk/coursedetails/F20CN?termcode=202324
+courseworkTitle: Coursework 2
+groupNumber: 1
