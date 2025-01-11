@@ -46,13 +46,27 @@
   let studentNames = ()
 
   for index in range(0, data.studentFirstName.len()) {
-    studentNames.push(strong(strfmt(
-      "{} {} ({})",
+    studentNames.push(strfmt(
+      "{} {}",
       data.studentFirstName.at(index),
       data.studentLastName.at(index),
+    ))
+  }
+
+  return studentNames
+}
+
+#let getStudentData(data) = {
+  let studentData = ()
+  let studentNames = getStudentNames(data)
+
+  for index in range(0, data.studentFirstName.len()) {
+    studentData.push(strong(strfmt(
+      "{} ({})",
+      studentNames.at(index),
       data.studentEmail.at(index)
     )))
   }
 
-  return studentNames.join("\n")
+  return studentData
 }
